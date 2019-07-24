@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Weather One</string>
+    <string name="action_settings">Settings</string>
+    <string name="text_flag">~</string>
+    <string name="init_flag">---</string>
+    <string name="text2_flag">/</string>
+    <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="my_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
+    <string name="data_info">Data from Openweathermap and HeWeather.</string>
+</resources>

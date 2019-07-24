@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        applicationId "com.example.wangd.weather"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        flavorDimensions "default"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            zipAlignEnabled false
+        }
+    }
+    productFlavors{
+        Weather_V1{ //基本版本
+            buildConfigField("String", "Weatherhost", "\"http://api.openweathermap.org/data/2.5/weather\"")
+            buildConfigField("String", "HFWeatherhost", "\"https://api.heweather.com/x3/weather\"")
+            buildConfigField("String", "owkey", "\"2f7dfa97f6ebbb335a9739ac03c3fd0d\"")
+            buildConfigField("String", "hfkey", "\"2f7dfa97f6ebbb335a9739ac03c3fd0d\"")
+            manifestPlaceholders.put("mapkey", "34f2dff31b0dcf88acf39e0aa7a8dd86")
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.loopj.android:android-async-http:1.4.10'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+//    implementation 'com.google.firebase:firebase-ads:9.0.0'
+//    implementation 'com.google.firebase:firebase-crash:9.0.0'
+}
+//apply plugin: 'com.google.gms.google-services'
