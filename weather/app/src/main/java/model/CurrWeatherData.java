@@ -2,12 +2,11 @@ package model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 当前天气数据
+ * openweather当前天气数据
  * Created by wangd on 2016/6/12.
  */
 public class CurrWeatherData implements Parcelable {

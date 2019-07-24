@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private WeatherResponse response;
     private WFResponse wfResponse;
     //    private MainView mainview;
-    private WeatherForecastData weatherForecastData;
+//    private WeatherForecastData weatherForecastData;
     private ForecastData forecastData;
     //    private AdView adView;
     //定位后的位置
