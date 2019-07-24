@@ -14,6 +14,7 @@ import java.util.Locale;
  * Created by wangd on 2016/4/17.
  * http工具
  */
+@Deprecated
 public class Httpclient {
     //openweather天气的地址
     public final static String Weatherhost = BuildConfig.Weatherhost;

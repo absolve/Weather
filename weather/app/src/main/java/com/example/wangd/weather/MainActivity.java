@@ -3,10 +3,13 @@ package com.example.wangd.weather;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,7 +27,9 @@ import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,14 +42,20 @@ import model.CurrWeatherData;
 import model.ForecastData;
 import model.ItemWeatherForecast;
 import model.WeatherForecastData;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import pub.devrel.easypermissions.EasyPermissions;
 import utils.DataUtils;
+import utils.HttpUtil;
 import utils.Httpclient;
 
 /**
  * Created by wangd on 2016/4/13.
  * 主界面
  */
-public class MainActivity extends Activity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+        SwipeRefreshLayout.OnRefreshListener, EasyPermissions.PermissionCallbacks {
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
     //声明mLocationOption对象
@@ -58,7 +69,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Swip
     //    private MainView mainview;
     private WeatherForecastData weatherForecastData;
     private ForecastData forecastData;
-//    private AdView adView;
+    //    private AdView adView;
     //定位后的位置
     private LocationEvent tempLocation = null;
     //列表适配器
@@ -92,18 +103,46 @@ public class MainActivity extends Activity implements View.OnClickListener, Swip
         recyclerView.setLayoutManager(linearLayoutManager);
         //设置刷新开启
 //        swipeRefreshLayout.setRefreshing(true);
-        //获取定位权限
-        if ( ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(Objects.requireNonNull(this),
-                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION}, 50);
-        }
+        //获取权限
+        checkPermission();
         //初始化定位功能
         initLocationClient();
         //开始定位
         mLocationClient.startLocation();
+//        HttpUtil.getCurrweather("beijing", new Callback() {
+//            @Override
+//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                if (response.isSuccessful()) {
+//                    Log.d("--", response.body().string());
+//                }
+//            }
+//        });
+    }
 
+    /**
+     * 检查权限
+     */
+    public void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions();
+        }
+    }
+
+    /**
+     * 请求相应的权限
+     */
+    public void requestPermissions() {
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+        if (!EasyPermissions.hasPermissions(this, perms)) {
+            EasyPermissions.requestPermissions(this,
+                    "需要允许以下权限程序才能正常运行：\n存储数据权限，定位权限", 1, perms);
+        }
     }
 
     /**
@@ -148,17 +187,11 @@ public class MainActivity extends Activity implements View.OnClickListener, Swip
     @Override
     protected void onResume() {
         super.onResume();
-//        if (adView != null) {
-//            adView.resume();
-//        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        if (adView != null) {
-//            adView.pause();
-//        }
     }
 
     @Override
@@ -167,10 +200,13 @@ public class MainActivity extends Activity implements View.OnClickListener, Swip
         if (mLocationClient != null) {
             mLocationClient.onDestroy();
         }
-//        if (adView != null) {
-//            adView.destroy();
-//        }
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     /**
@@ -263,6 +299,17 @@ public class MainActivity extends Activity implements View.OnClickListener, Swip
             Httpclient.getHFForecast(tempLocation.cityName, wfResponse);
         }
     }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+    }
+
 
     /**
      * 当前天气的回调
