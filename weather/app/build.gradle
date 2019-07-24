@@ -40,7 +40,9 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'org.greenrobot:eventbus:3.0.0'
-//    implementation 'com.google.firebase:firebase-ads:9.0.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "com.squareup.okhttp3:okhttp:4.0.1"
+    //    implementation 'com.google.firebase:firebase-ads:9.0.0'
 //    implementation 'com.google.firebase:firebase-crash:9.0.0'
 }
 //apply plugin: 'com.google.gms.google-services'
