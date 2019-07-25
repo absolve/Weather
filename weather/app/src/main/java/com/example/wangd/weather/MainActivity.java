@@ -1,13 +1,9 @@
 package com.example.wangd.weather;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,9 +27,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
-import Adapter.WeatherAdapter;
+import adapter.WeatherAdapter;
 import cz.msebera.android.httpclient.Header;
 import events.GetCurrWeatherMsgEvent;
 import events.GetForecastEvent;
@@ -174,13 +169,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.weather) {
-            Httpclient.getCurrweather("fuzhou", response);
+//            Httpclient.getCurrweather("fuzhou", response);
+            HttpUtil.getForecastOW("fuzhou", "zh-cn", new Callback() {
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+                }
+            });
         } else if (v.getId() == R.id.wf) {
 //            Httpclient.getXZForecast("fuzhou","en",wfResponse);
-            if (tempLocation == null) {
-                return;
-            }
-            Httpclient.getHFForecast(tempLocation.cityName, wfResponse);
+//            if (tempLocation == null) {
+//                return;
+//            }
+//            Httpclient.getHFForecast(tempLocation.cityName, wfResponse);
+            HttpUtil.getForecastOW("fuzhou", "zh_cn", new Callback() {
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    if (response.isSuccessful()) {
+//                    Log.d("--", response.body().string());
+                        Gson gson = new Gson();
+                        try {
+                            WeatherForecastData data = gson.fromJson(response.body().string(), WeatherForecastData.class);
+                            Log.d("--",data.toString());
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                }
+                }
+            });
         }
     }
 

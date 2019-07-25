@@ -198,7 +198,7 @@ public class DataUtils {
      *
      * @param icon 天气图标的代码
      *             openweathermap的天气代码
-     * @return
+     * @return  图片的id
      */
     public static int getWeatherImg(String icon) {
         //默认设置成太阳
@@ -256,6 +256,11 @@ public class DataUtils {
         return img;
     }
 
+    /**
+     * 获取和风天气的图标
+     * @param flag
+     * @return
+     */
     public static int getForecastImg(int flag) {
         if (flag == 100) {
             return R.mipmap.img100;

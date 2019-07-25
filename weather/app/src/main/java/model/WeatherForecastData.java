@@ -186,6 +186,14 @@ public class WeatherForecastData implements Parcelable {
                     return new CoordBean[size];
                 }
             };
+
+            @Override
+            public String toString() {
+                return "CoordBean{" +
+                        "lon=" + lon +
+                        ", lat=" + lat +
+                        '}';
+            }
         }
 
         @Override
@@ -226,9 +234,21 @@ public class WeatherForecastData implements Parcelable {
                 return new CityBean[size];
             }
         };
+
+        @Override
+        public String toString() {
+            return "CityBean{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", coord=" + coord +
+                    ", country='" + country + '\'' +
+                    ", population=" + population +
+                    ", timezone=" + timezone +
+                    '}';
+        }
     }
 
-    public static class ListBean {
+    public static class ListBean implements Parcelable {
         /**
          * dt : 1563940800
          * temp : {"day":18.1,"min":17.83,"max":18.26,"night":17.84,"eve":17.83,"morn":18.1}
@@ -323,7 +343,7 @@ public class WeatherForecastData implements Parcelable {
             this.weather = weather;
         }
 
-        public static class TempBean {
+        public static class TempBean implements Parcelable {
             /**
              * day : 18.1
              * min : 17.83
@@ -387,9 +407,60 @@ public class WeatherForecastData implements Parcelable {
             public void setMorn(double morn) {
                 this.morn = morn;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeDouble(this.day);
+                dest.writeDouble(this.min);
+                dest.writeDouble(this.max);
+                dest.writeDouble(this.night);
+                dest.writeDouble(this.eve);
+                dest.writeDouble(this.morn);
+            }
+
+            public TempBean() {
+            }
+
+            protected TempBean(Parcel in) {
+                this.day = in.readDouble();
+                this.min = in.readDouble();
+                this.max = in.readDouble();
+                this.night = in.readDouble();
+                this.eve = in.readDouble();
+                this.morn = in.readDouble();
+            }
+
+            public static final Creator<TempBean> CREATOR = new Creator<TempBean>() {
+                @Override
+                public TempBean createFromParcel(Parcel source) {
+                    return new TempBean(source);
+                }
+
+                @Override
+                public TempBean[] newArray(int size) {
+                    return new TempBean[size];
+                }
+            };
+
+            @Override
+            public String toString() {
+                return "TempBean{" +
+                        "day=" + day +
+                        ", min=" + min +
+                        ", max=" + max +
+                        ", night=" + night +
+                        ", eve=" + eve +
+                        ", morn=" + morn +
+                        '}';
+            }
         }
 
-        public static class WeatherBean {
+        public static class WeatherBean implements Parcelable {
             /**
              * id : 500
              * main : Rain
@@ -433,6 +504,112 @@ public class WeatherForecastData implements Parcelable {
             public void setIcon(String icon) {
                 this.icon = icon;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeInt(this.id);
+                dest.writeString(this.main);
+                dest.writeString(this.description);
+                dest.writeString(this.icon);
+            }
+
+            public WeatherBean() {
+            }
+
+            protected WeatherBean(Parcel in) {
+                this.id = in.readInt();
+                this.main = in.readString();
+                this.description = in.readString();
+                this.icon = in.readString();
+            }
+
+            public static final Creator<WeatherBean> CREATOR = new Creator<WeatherBean>() {
+                @Override
+                public WeatherBean createFromParcel(Parcel source) {
+                    return new WeatherBean(source);
+                }
+
+                @Override
+                public WeatherBean[] newArray(int size) {
+                    return new WeatherBean[size];
+                }
+            };
+
+            @Override
+            public String toString() {
+                return "WeatherBean{" +
+                        "id=" + id +
+                        ", main='" + main + '\'' +
+                        ", description='" + description + '\'' +
+                        ", icon='" + icon + '\'' +
+                        '}';
+            }
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(this.dt);
+            dest.writeParcelable(this.temp, flags);
+            dest.writeDouble(this.pressure);
+            dest.writeInt(this.humidity);
+            dest.writeDouble(this.speed);
+            dest.writeInt(this.deg);
+            dest.writeInt(this.clouds);
+            dest.writeDouble(this.rain);
+            dest.writeList(this.weather);
+        }
+
+        public ListBean() {
+        }
+
+        protected ListBean(Parcel in) {
+            this.dt = in.readInt();
+            this.temp = in.readParcelable(TempBean.class.getClassLoader());
+            this.pressure = in.readDouble();
+            this.humidity = in.readInt();
+            this.speed = in.readDouble();
+            this.deg = in.readInt();
+            this.clouds = in.readInt();
+            this.rain = in.readDouble();
+            this.weather = new ArrayList<WeatherBean>();
+            in.readList(this.weather, WeatherBean.class.getClassLoader());
+        }
+
+        public static final Creator<ListBean> CREATOR = new Creator<ListBean>() {
+            @Override
+            public ListBean createFromParcel(Parcel source) {
+                return new ListBean(source);
+            }
+
+            @Override
+            public ListBean[] newArray(int size) {
+                return new ListBean[size];
+            }
+        };
+
+        @Override
+        public String toString() {
+            return "ListBean{" +
+                    "dt=" + dt +
+                    ", temp=" + temp +
+                    ", pressure=" + pressure +
+                    ", humidity=" + humidity +
+                    ", speed=" + speed +
+                    ", deg=" + deg +
+                    ", clouds=" + clouds +
+                    ", rain=" + rain +
+                    ", weather=" + weather +
+                    '}';
         }
     }
 
@@ -473,4 +650,15 @@ public class WeatherForecastData implements Parcelable {
             return new WeatherForecastData[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "WeatherForecastData{" +
+                "city=" + city +
+                ", cod='" + cod + '\'' +
+                ", message=" + message +
+                ", cnt=" + cnt +
+                ", list=" + list +
+                '}';
+    }
 }
