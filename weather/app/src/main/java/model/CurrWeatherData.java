@@ -2,6 +2,7 @@ package model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,74 +12,35 @@ import java.util.List;
  */
 public class CurrWeatherData implements Parcelable {
 
-    /**
-     * lon : 145.77
-     * lat : -16.92
-     */
 
-    private CoordBean coord;
     /**
-     * coord : {"lon":145.77,"lat":-16.92}
-     * weather : [{"id":500,"main":"Rain","description":"light rain","icon":"10n"}]
+     * coord : {"lon":119.3,"lat":26.08}
+     * weather : [{"id":801,"main":"Clouds","description":"晴，少云","icon":"02d"}]
      * base : stations
-     * main : {"temp":295,"pressure":1017,"humidity":10,"temp_min":291.48,"temp_max":297.04}
-     * wind : {"speed":8.16,"deg":121.003}
-     * rain : {"3h":0.22}
-     * clouds : {"all":100}
-     * dt : 1465733110
-     * sys : {"type":3,"id":35642,"message":0.0153,"country":"AU","sunrise":1465677778,"sunset":1465717847}
-     * id : 2172797
-     * name : Cairns
+     * main : {"temp":303.15,"pressure":1006,"humidity":74,"temp_min":303.15,"temp_max":303.15}
+     * visibility : 8000
+     * wind : {"speed":5,"deg":190}
+     * clouds : {"all":20}
+     * dt : 1564105734
+     * sys : {"type":1,"id":9658,"message":0.0085,"country":"CN","sunrise":1564089906,"sunset":1564138395}
+     * timezone : 28800
+     * id : 1810821
+     * name : Fuzhou
      * cod : 200
      */
 
+    private CoordBean coord;
     private String base;
-    /**
-     * temp : 295
-     * pressure : 1017
-     * humidity : 10
-     * temp_min : 291.48
-     * temp_max : 297.04
-     */
-
     private MainBean main;
-    /**
-     * speed : 8.16
-     * deg : 121.003
-     */
-
+    private int visibility;
     private WindBean wind;
-    /**
-     * 3h : 0.22
-     */
-
-    private RainBean rain;
-    /**
-     * all : 100
-     */
-
     private CloudsBean clouds;
-    private int dt;
-    /**
-     * type : 3
-     * id : 35642
-     * message : 0.0153
-     * country : AU
-     * sunrise : 1465677778
-     * sunset : 1465717847
-     */
-
+    private long dt;
     private SysBean sys;
+    private int timezone;
     private int id;
     private String name;
     private int cod;
-    /**
-     * id : 500
-     * main : Rain
-     * description : light rain
-     * icon : 10n
-     */
-
     private List<WeatherBean> weather;
 
     public CoordBean getCoord() {
@@ -105,20 +67,20 @@ public class CurrWeatherData implements Parcelable {
         this.main = main;
     }
 
+    public int getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(int visibility) {
+        this.visibility = visibility;
+    }
+
     public WindBean getWind() {
         return wind;
     }
 
     public void setWind(WindBean wind) {
         this.wind = wind;
-    }
-
-    public RainBean getRain() {
-        return rain;
-    }
-
-    public void setRain(RainBean rain) {
-        this.rain = rain;
     }
 
     public CloudsBean getClouds() {
@@ -129,11 +91,11 @@ public class CurrWeatherData implements Parcelable {
         this.clouds = clouds;
     }
 
-    public int getDt() {
+    public long getDt() {
         return dt;
     }
 
-    public void setDt(int dt) {
+    public void setDt(long dt) {
         this.dt = dt;
     }
 
@@ -143,6 +105,14 @@ public class CurrWeatherData implements Parcelable {
 
     public void setSys(SysBean sys) {
         this.sys = sys;
+    }
+
+    public int getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(int timezone) {
+        this.timezone = timezone;
     }
 
     public int getId() {
@@ -178,6 +148,11 @@ public class CurrWeatherData implements Parcelable {
     }
 
     public static class CoordBean implements Parcelable {
+        /**
+         * lon : 119.3
+         * lat : 26.08
+         */
+
         private double lon;
         private double lat;
 
@@ -227,17 +202,30 @@ public class CurrWeatherData implements Parcelable {
                 return new CoordBean[size];
             }
         };
+
+        @Override
+        public String toString() {
+            return "CoordBean{" +
+                    "lon=" + lon +
+                    ", lat=" + lat +
+                    '}';
+        }
     }
 
     public static class MainBean implements Parcelable {
+        /**
+         * temp : 303.15
+         * pressure : 1006
+         * humidity : 74
+         * temp_min : 303.15
+         * temp_max : 303.15
+         */
+
         private double temp;
-        private double pressure;
-        private double humidity;
+        private int pressure;
+        private int humidity;
         private double temp_min;
         private double temp_max;
-        private double sea_level;
-        private double grnd_level;
-
 
         public double getTemp() {
             return temp;
@@ -247,19 +235,19 @@ public class CurrWeatherData implements Parcelable {
             this.temp = temp;
         }
 
-        public double getPressure() {
+        public int getPressure() {
             return pressure;
         }
 
-        public void setPressure(double pressure) {
+        public void setPressure(int pressure) {
             this.pressure = pressure;
         }
 
-        public double getHumidity() {
+        public int getHumidity() {
             return humidity;
         }
 
-        public void setHumidity(double humidity) {
+        public void setHumidity(int humidity) {
             this.humidity = humidity;
         }
 
@@ -279,22 +267,6 @@ public class CurrWeatherData implements Parcelable {
             this.temp_max = temp_max;
         }
 
-        public double getSea_level() {
-            return sea_level;
-        }
-
-        public void setSea_level(double sea_level) {
-            this.sea_level = sea_level;
-        }
-
-        public double getGrnd_level() {
-            return grnd_level;
-        }
-
-        public void setGrnd_level(double grnd_level) {
-            this.grnd_level = grnd_level;
-        }
-
         @Override
         public int describeContents() {
             return 0;
@@ -303,12 +275,10 @@ public class CurrWeatherData implements Parcelable {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeDouble(this.temp);
-            dest.writeDouble(this.pressure);
-            dest.writeDouble(this.humidity);
+            dest.writeInt(this.pressure);
+            dest.writeInt(this.humidity);
             dest.writeDouble(this.temp_min);
             dest.writeDouble(this.temp_max);
-            dest.writeDouble(this.sea_level);
-            dest.writeDouble(this.grnd_level);
         }
 
         public MainBean() {
@@ -316,12 +286,10 @@ public class CurrWeatherData implements Parcelable {
 
         protected MainBean(Parcel in) {
             this.temp = in.readDouble();
-            this.pressure = in.readDouble();
-            this.humidity = in.readDouble();
+            this.pressure = in.readInt();
+            this.humidity = in.readInt();
             this.temp_min = in.readDouble();
             this.temp_max = in.readDouble();
-            this.sea_level = in.readDouble();
-            this.grnd_level = in.readDouble();
         }
 
         public static final Creator<MainBean> CREATOR = new Creator<MainBean>() {
@@ -335,25 +303,41 @@ public class CurrWeatherData implements Parcelable {
                 return new MainBean[size];
             }
         };
+
+        @Override
+        public String toString() {
+            return "MainBean{" +
+                    "temp=" + temp +
+                    ", pressure=" + pressure +
+                    ", humidity=" + humidity +
+                    ", temp_min=" + temp_min +
+                    ", temp_max=" + temp_max +
+                    '}';
+        }
     }
 
     public static class WindBean implements Parcelable {
-        private double speed;
-        private double deg;
+        /**
+         * speed : 5
+         * deg : 190
+         */
 
-        public double getSpeed() {
+        private int speed;
+        private int deg;
+
+        public int getSpeed() {
             return speed;
         }
 
-        public void setSpeed(double speed) {
+        public void setSpeed(int speed) {
             this.speed = speed;
         }
 
-        public double getDeg() {
+        public int getDeg() {
             return deg;
         }
 
-        public void setDeg(double deg) {
+        public void setDeg(int deg) {
             this.deg = deg;
         }
 
@@ -364,16 +348,16 @@ public class CurrWeatherData implements Parcelable {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-            dest.writeDouble(this.speed);
-            dest.writeDouble(this.deg);
+            dest.writeInt(this.speed);
+            dest.writeInt(this.deg);
         }
 
         public WindBean() {
         }
 
         protected WindBean(Parcel in) {
-            this.speed = in.readDouble();
-            this.deg = in.readDouble();
+            this.speed = in.readInt();
+            this.deg = in.readInt();
         }
 
         public static final Creator<WindBean> CREATOR = new Creator<WindBean>() {
@@ -387,51 +371,21 @@ public class CurrWeatherData implements Parcelable {
                 return new WindBean[size];
             }
         };
-    }
-
-    public static class RainBean implements Parcelable {
-
-        private double value3h;
-
-        public double getValue3h() {
-            return value3h;
-        }
-
-        public void setValue3h(double value3h) {
-            this.value3h = value3h;
-        }
 
         @Override
-        public int describeContents() {
-            return 0;
+        public String toString() {
+            return "WindBean{" +
+                    "speed=" + speed +
+                    ", deg=" + deg +
+                    '}';
         }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeDouble(this.value3h);
-        }
-
-        public RainBean() {
-        }
-
-        protected RainBean(Parcel in) {
-            this.value3h = in.readDouble();
-        }
-
-        public static final Creator<RainBean> CREATOR = new Creator<RainBean>() {
-            @Override
-            public RainBean createFromParcel(Parcel source) {
-                return new RainBean(source);
-            }
-
-            @Override
-            public RainBean[] newArray(int size) {
-                return new RainBean[size];
-            }
-        };
     }
 
     public static class CloudsBean implements Parcelable {
+        /**
+         * all : 20
+         */
+
         private int all;
 
         public int getAll() {
@@ -470,15 +424,31 @@ public class CurrWeatherData implements Parcelable {
                 return new CloudsBean[size];
             }
         };
+
+        @Override
+        public String toString() {
+            return "CloudsBean{" +
+                    "all=" + all +
+                    '}';
+        }
     }
 
     public static class SysBean implements Parcelable {
+        /**
+         * type : 1
+         * id : 9658
+         * message : 0.0085
+         * country : CN
+         * sunrise : 1564089906
+         * sunset : 1564138395
+         */
+
         private int type;
         private int id;
         private double message;
         private String country;
-        private Long sunrise;
-        private Long sunset;
+        private long sunrise;
+        private long sunset;
 
         public int getType() {
             return type;
@@ -512,19 +482,19 @@ public class CurrWeatherData implements Parcelable {
             this.country = country;
         }
 
-        public Long getSunrise() {
+        public long getSunrise() {
             return sunrise;
         }
 
-        public void setSunrise(Long sunrise) {
+        public void setSunrise(long sunrise) {
             this.sunrise = sunrise;
         }
 
-        public Long getSunset() {
+        public long getSunset() {
             return sunset;
         }
 
-        public void setSunset(Long sunset) {
+        public void setSunset(long sunset) {
             this.sunset = sunset;
         }
 
@@ -566,9 +536,28 @@ public class CurrWeatherData implements Parcelable {
                 return new SysBean[size];
             }
         };
+
+        @Override
+        public String toString() {
+            return "SysBean{" +
+                    "type=" + type +
+                    ", id=" + id +
+                    ", message=" + message +
+                    ", country='" + country + '\'' +
+                    ", sunrise=" + sunrise +
+                    ", sunset=" + sunset +
+                    '}';
+        }
     }
 
     public static class WeatherBean {
+        /**
+         * id : 801
+         * main : Clouds
+         * description : 晴，少云
+         * icon : 02d
+         */
+
         private int id;
         private String main;
         private String description;
@@ -605,6 +594,16 @@ public class CurrWeatherData implements Parcelable {
         public void setIcon(String icon) {
             this.icon = icon;
         }
+
+        @Override
+        public String toString() {
+            return "WeatherBean{" +
+                    "id=" + id +
+                    ", main='" + main + '\'' +
+                    ", description='" + description + '\'' +
+                    ", icon='" + icon + '\'' +
+                    '}';
+        }
     }
 
     @Override
@@ -617,11 +616,12 @@ public class CurrWeatherData implements Parcelable {
         dest.writeParcelable(this.coord, flags);
         dest.writeString(this.base);
         dest.writeParcelable(this.main, flags);
+        dest.writeInt(this.visibility);
         dest.writeParcelable(this.wind, flags);
-        dest.writeParcelable(this.rain, flags);
         dest.writeParcelable(this.clouds, flags);
-        dest.writeInt(this.dt);
+        dest.writeLong(this.dt);
         dest.writeParcelable(this.sys, flags);
+        dest.writeInt(this.timezone);
         dest.writeInt(this.id);
         dest.writeString(this.name);
         dest.writeInt(this.cod);
@@ -635,11 +635,12 @@ public class CurrWeatherData implements Parcelable {
         this.coord = in.readParcelable(CoordBean.class.getClassLoader());
         this.base = in.readString();
         this.main = in.readParcelable(MainBean.class.getClassLoader());
+        this.visibility = in.readInt();
         this.wind = in.readParcelable(WindBean.class.getClassLoader());
-        this.rain = in.readParcelable(RainBean.class.getClassLoader());
         this.clouds = in.readParcelable(CloudsBean.class.getClassLoader());
-        this.dt = in.readInt();
+        this.dt = in.readLong();
         this.sys = in.readParcelable(SysBean.class.getClassLoader());
+        this.timezone = in.readInt();
         this.id = in.readInt();
         this.name = in.readString();
         this.cod = in.readInt();
@@ -658,4 +659,23 @@ public class CurrWeatherData implements Parcelable {
             return new CurrWeatherData[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "CurrWeatherData{" +
+                "coord=" + coord +
+                ", base='" + base + '\'' +
+                ", main=" + main +
+                ", visibility=" + visibility +
+                ", wind=" + wind +
+                ", clouds=" + clouds +
+                ", dt=" + dt +
+                ", sys=" + sys +
+                ", timezone=" + timezone +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", cod=" + cod +
+                ", weather=" + weather +
+                '}';
+    }
 }

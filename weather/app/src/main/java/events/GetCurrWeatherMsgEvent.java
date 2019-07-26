@@ -34,7 +34,7 @@ public class GetCurrWeatherMsgEvent {
         itemCurrWeatherData.country = this.data.getName() + "," + sysBean.getCountry();
         itemCurrWeatherData.sunrise = DataUtils.getTime(sysBean.getSunrise());
         itemCurrWeatherData.sunset = DataUtils.getTime(sysBean.getSunset());
-        itemCurrWeatherData.current_day_week = DataUtils.getWeek();
+        itemCurrWeatherData.current_day_week = DataUtils.getWeek(true);
         itemCurrWeatherData.wind_deg = DataUtils.getWindDeg(windBean.getDeg());
         //返回天气信息列表
         if (weatherBean.size() != 0) {

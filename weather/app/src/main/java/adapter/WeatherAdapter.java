@@ -80,13 +80,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ViewHolder2) holder).setStyle(position);
             if (forecastsList.size() != 0) {
                 ((ViewHolder2) holder).setWeather(forecastsList.get(position - 1).weather_description);
-                int weathercode = Integer.valueOf(forecastsList.get(position - 1).icon);
-                ((ViewHolder2) holder).setWeatherImg(DataUtils.getForecastImg(weathercode));
+                ((ViewHolder2) holder).setWeatherImg(DataUtils.getWeatherImg(forecastsList.get(position - 1).icon));
                 ((ViewHolder2) holder).setMin_temp(forecastsList.get(position - 1).min_temp);
                 ((ViewHolder2) holder).setMax_temp(forecastsList.get(position - 1).max_temp);
                 ((ViewHolder2) holder).setData(forecastsList.get(position - 1).date);
             }
-
         } else if (holder instanceof ViewHolder3) {
             //天气详细信息
             if (currWeatherData != null) {
@@ -102,16 +100,16 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 7;
+        return 9;
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
             return HEAD_ITEMTYPE;
-        } else if (position == 5) {
+        } else if (position == 7) {
             return FOOT_ITEMTYPE;
-        } else if (position == 6) {
+        } else if (position == 8) {
             return ADS_ITEMTYPE;
         } else {
             return BODY_ITEMTYPE;
@@ -285,8 +283,9 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void setCurrWeatherData(ItemCurrWeatherData currWeatherData) {
         this.currWeatherData = currWeatherData;
         if (currWeatherData != null) {
-            notifyItemChanged(0);
-            notifyItemChanged(5);
+//            notifyItemChanged(0);
+//            notifyItemChanged(8);
+            notifyDataSetChanged();
         }
     }
 
@@ -294,9 +293,10 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (temp != null) {
             forecastsList.clear();
             forecastsList.addAll(temp);
-            for (int i = 0; i < forecastsList.size(); i++) {
-                notifyItemChanged(i + 1);
-            }
+            notifyDataSetChanged();
+//            for (int i = 0; i < forecastsList.size(); i++) {
+//                notifyItemChanged(i + 1);
+//            }
         }
     }
 }

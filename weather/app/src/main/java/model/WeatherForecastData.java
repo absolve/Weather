@@ -261,7 +261,7 @@ public class WeatherForecastData implements Parcelable {
          * rain : 1.5
          */
 
-        private int dt;
+        private long dt;
         private TempBean temp;
         private double pressure;
         private int humidity;
@@ -271,11 +271,11 @@ public class WeatherForecastData implements Parcelable {
         private double rain;
         private List<WeatherBean> weather;
 
-        public int getDt() {
+        public long getDt() {
             return dt;
         }
 
-        public void setDt(int dt) {
+        public void setDt(long dt) {
             this.dt = dt;
         }
 
@@ -558,7 +558,7 @@ public class WeatherForecastData implements Parcelable {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(this.dt);
+            dest.writeLong(this.dt);
             dest.writeParcelable(this.temp, flags);
             dest.writeDouble(this.pressure);
             dest.writeInt(this.humidity);

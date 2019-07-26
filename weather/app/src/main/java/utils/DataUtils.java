@@ -19,6 +19,7 @@ import java.util.TimeZone;
 
 import model.ForecastData.HeWeatherDataServiceBean.DailyForecastBean;
 import model.ItemWeatherForecast;
+import model.WeatherForecastData;
 import model.WeatherForecastData.ListBean;
 
 /**
@@ -36,6 +37,18 @@ public class DataUtils {
     public static String getTime(Long dt) {
 //        DateFormat format = new SimpleDateFormat("HH:mm:ss");
         DateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        Long time = dt * 1000;
+        return format.format(time);
+    }
+
+    /**
+     * 从utf中获取月份日期
+     *
+     * @param dt
+     * @return
+     */
+    public static String getMonth(Long dt) {
+        DateFormat format = new SimpleDateFormat("MM-dd", Locale.getDefault());
         Long time = dt * 1000;
         return format.format(time);
     }
@@ -80,6 +93,29 @@ public class DataUtils {
         return list;
     }
 
+    /**
+     * 从天气预报中获取适配器上显示的数据
+     *
+     * @param data
+     * @return
+     */
+    public static List<ItemWeatherForecast> getItemForecast(WeatherForecastData data) {
+        List<ItemWeatherForecast> list = new ArrayList<ItemWeatherForecast>();
+        List<ListBean> temp = data.getList();
+        for (ListBean bean : temp) {
+            ItemWeatherForecast item = new ItemWeatherForecast();
+            item.date = getMonth(bean.getDt());
+            item.max_temp = DataUtils.getK2C(bean.getTemp().getMax());
+            item.min_temp = DataUtils.getK2C(bean.getTemp().getMin());
+            if (bean.getWeather().size() > 0) {
+                item.icon = bean.getWeather().get(0).getIcon();
+                item.weather_description = bean.getWeather().get(0).getDescription();
+            }
+            list.add(item);
+        }
+        return list;
+    }
+
     //排序
 //    public static List<ListBean> sort(List<ListBean> data) {
 //        Collections.sort(data, new Comparator<ListBean>() {
@@ -99,8 +135,8 @@ public class DataUtils {
      * @param wind_deg 角度
      * @return
      */
-    public static String getWindDeg(Double wind_deg) {
-        int degPos = wind_deg.intValue();
+    public static String getWindDeg(int wind_deg) {
+        int degPos = wind_deg;
         if (wind_deg < 0) {
             degPos += (-wind_deg / 360 + 1) * 360;
         }
@@ -150,29 +186,30 @@ public class DataUtils {
     /**
      * 获取当前时间的星期
      *
+     * @param zh_cn 是否中文
      * @return
      */
-    public static String getWeek() {
+    public static String getWeek(boolean zh_cn) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(System.currentTimeMillis());
         int flag = cal.get(Calendar.DAY_OF_WEEK);
         switch (flag) {
             case Calendar.SUNDAY:
-                return "SUNDAY";
+                return !zh_cn ? "SUNDAY" : "星期日";
             case Calendar.MONDAY:
-                return "MONDAY";
+                return !zh_cn ? "MONDAY" : "星期一";
             case Calendar.TUESDAY:
-                return "TUESDAY";
+                return !zh_cn ? "TUESDAY" : "星期二";
             case Calendar.WEDNESDAY:
-                return "WEDNESDAY";
+                return !zh_cn ? "WEDNESDAY" : "星期三";
             case Calendar.THURSDAY:
-                return "THURSDAY";
+                return !zh_cn ? "THURSDAY" : "星期四";
             case Calendar.FRIDAY:
-                return "FRIDAY";
+                return !zh_cn ? "FRIDAY" : "星期五";
             case Calendar.SATURDAY:
-                return "SATURDAY";
+                return !zh_cn ? "SATURDAY" : "星期六";
             default:
-                return "MONDAY";
+                return !zh_cn ? "MONDAY" : "星期一";
         }
     }
 
@@ -198,7 +235,7 @@ public class DataUtils {
      *
      * @param icon 天气图标的代码
      *             openweathermap的天气代码
-     * @return  图片的id
+     * @return 图片的id
      */
     public static int getWeatherImg(String icon) {
         //默认设置成太阳
@@ -258,6 +295,7 @@ public class DataUtils {
 
     /**
      * 获取和风天气的图标
+     *
      * @param flag
      * @return
      */
