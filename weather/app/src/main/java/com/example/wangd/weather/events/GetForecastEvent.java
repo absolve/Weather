@@ -1,8 +1,8 @@
-package events;
+package com.example.wangd.weather.events;
 
 import java.util.List;
 
-import model.ItemWeatherForecast;
+import com.example.wangd.weather.model.ItemWeatherForecast;
 
 /** 获取天气预报的事件
  * Created by wangd on 2016/7/29.

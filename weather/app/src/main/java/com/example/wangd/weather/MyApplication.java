@@ -7,8 +7,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
-import utils.HttpUtil;
-import utils.Httpclient;
+import com.example.wangd.weather.utils.HttpUtil;
+import com.example.wangd.weather.utils.Httpclient;
 
 /** Application
  * Created by wangd on 2016/4/17.

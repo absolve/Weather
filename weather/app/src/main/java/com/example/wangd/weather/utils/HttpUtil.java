@@ -1,4 +1,4 @@
-package utils;
+package com.example.wangd.weather.utils;
 
 import com.example.wangd.weather.BuildConfig;
 

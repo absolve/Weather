@@ -1,6 +1,4 @@
-package utils;
-
-import android.util.Log;
+package com.example.wangd.weather.utils;
 
 import com.example.wangd.weather.R;
 
@@ -10,17 +8,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import model.ForecastData.HeWeatherDataServiceBean.DailyForecastBean;
-import model.ItemWeatherForecast;
-import model.WeatherForecastData;
-import model.WeatherForecastData.ListBean;
+import com.example.wangd.weather.model.ForecastData.HeWeatherDataServiceBean.DailyForecastBean;
+import com.example.wangd.weather.model.ItemWeatherForecast;
+import com.example.wangd.weather.model.WeatherForecastData;
+import com.example.wangd.weather.model.WeatherForecastData.ListBean;
 
 /**
  * 数据的处理

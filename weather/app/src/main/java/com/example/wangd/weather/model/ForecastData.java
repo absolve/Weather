@@ -1,4 +1,4 @@
-package model;
+package com.example.wangd.weather.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

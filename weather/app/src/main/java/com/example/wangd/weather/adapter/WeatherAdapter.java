@@ -1,4 +1,4 @@
-package adapter;
+package com.example.wangd.weather.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +13,9 @@ import com.example.wangd.weather.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ItemCurrWeatherData;
-import model.ItemWeatherForecast;
-import utils.DataUtils;
+import com.example.wangd.weather.model.ItemCurrWeatherData;
+import com.example.wangd.weather.model.ItemWeatherForecast;
+import com.example.wangd.weather.utils.DataUtils;
 
 /**
  * RecyclerView适配器

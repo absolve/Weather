@@ -1,4 +1,4 @@
-package views;
+package com.example.wangd.weather.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,8 +12,8 @@ import com.example.wangd.weather.R;
 
 import org.json.JSONObject;
 
-import model.CurrWeatherData;
-import utils.DataUtils;
+import com.example.wangd.weather.model.CurrWeatherData;
+import com.example.wangd.weather.utils.DataUtils;
 
 /**
  * Created by wangd on 2016/4/24.

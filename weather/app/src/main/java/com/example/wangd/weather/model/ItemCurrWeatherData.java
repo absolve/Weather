@@ -1,4 +1,4 @@
-package model;
+package com.example.wangd.weather.model;
 
 /**
  * Created by wangd on 2016/7/17.

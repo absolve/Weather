@@ -29,22 +29,22 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.List;
 
-import adapter.WeatherAdapter;
+import com.example.wangd.weather.adapter.WeatherAdapter;
 import cz.msebera.android.httpclient.Header;
-import events.GetCurrWeatherMsgEvent;
-import events.GetForecastEvent;
-import events.LocationEvent;
-import model.CurrWeatherData;
-import model.ForecastData;
-import model.ItemWeatherForecast;
-import model.WeatherForecastData;
+import com.example.wangd.weather.events.GetCurrWeatherMsgEvent;
+import com.example.wangd.weather.events.GetForecastEvent;
+import com.example.wangd.weather.events.LocationEvent;
+import com.example.wangd.weather.model.CurrWeatherData;
+import com.example.wangd.weather.model.ForecastData;
+import com.example.wangd.weather.model.ItemWeatherForecast;
+import com.example.wangd.weather.model.WeatherForecastData;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import pub.devrel.easypermissions.EasyPermissions;
-import utils.DataUtils;
-import utils.HttpUtil;
-import utils.Httpclient;
+import com.example.wangd.weather.utils.DataUtils;
+import com.example.wangd.weather.utils.HttpUtil;
+import com.example.wangd.weather.utils.Httpclient;
 
 /**
  * Created by wangd on 2016/4/13.
@@ -354,7 +354,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if (response.isSuccessful()){
                     Gson gson = new Gson();
-                    WeatherForecastData data = gson.fromJson(response.body().string(),WeatherForecastData.class);
+                    String str = response.body().string();
+                    Log.d("--",str);
+                    WeatherForecastData data = gson.fromJson(str,WeatherForecastData.class);
                     List<ItemWeatherForecast> list=DataUtils.getItemForecast(data);
                     EventBus.getDefault().post(new GetForecastEvent(list, 0));
                 }

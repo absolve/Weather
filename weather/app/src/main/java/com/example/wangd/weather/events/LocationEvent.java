@@ -1,4 +1,4 @@
-package events;
+package com.example.wangd.weather.events;
 
 /** 定位事件
  * Created by wangd on 2016/7/26.

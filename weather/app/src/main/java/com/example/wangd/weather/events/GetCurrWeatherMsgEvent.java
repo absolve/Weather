@@ -1,10 +1,10 @@
-package events;
+package com.example.wangd.weather.events;
 
 import java.util.List;
 
-import model.CurrWeatherData;
-import model.ItemCurrWeatherData;
-import utils.DataUtils;
+import com.example.wangd.weather.model.CurrWeatherData;
+import com.example.wangd.weather.model.ItemCurrWeatherData;
+import com.example.wangd.weather.utils.DataUtils;
 
 /**
  * Created by wangd on 2016/7/17.

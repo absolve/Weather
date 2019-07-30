@@ -1,4 +1,4 @@
-package utils;
+package com.example.wangd.weather.utils;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,8 +7,6 @@ import com.example.wangd.weather.BuildConfig;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
-import java.util.Locale;
 
 /**
  * Created by wangd on 2016/4/17.
