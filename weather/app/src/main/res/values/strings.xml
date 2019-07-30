@@ -14,10 +14,10 @@
     <string name="img_description">icon</string>
     <string name="text_winddt">Wind direction:%s</string>
     <string name="text_winddt_zh">风向:%s</string>
-    <string name="text_sunrise">Sunrise:</string>
-    <string name="text_sunrise_zh">日出:</string>
-    <string name="text_sunset">Sunset:</string>
-    <string name="text_sunset_zh">日落:</string>
+    <string name="text_sunrise">Sunrise:%s</string>
+    <string name="text_sunrise_zh">日出:%s</string>
+    <string name="text_sunset">Sunset:%s</string>
+    <string name="text_sunset_zh">日落:%s</string>
 
     <string name="data_info">Data from Openweathermap and HeWeather.</string>
 </resources>

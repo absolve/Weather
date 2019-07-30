@@ -24,13 +24,13 @@ public class GetCurrWeatherMsgEvent {
         CurrWeatherData.CloudsBean cloudsBean = this.data.getClouds();
         CurrWeatherData.SysBean sysBean = this.data.getSys();
         List<CurrWeatherData.WeatherBean> weatherBean = this.data.getWeather();
-        itemCurrWeatherData.pressure = mainBean.getPressure() + "hpa";
-        itemCurrWeatherData.humidity = mainBean.getHumidity() + "%";
+        itemCurrWeatherData.pressure =String.valueOf(mainBean.getPressure());
+        itemCurrWeatherData.humidity = String.valueOf(mainBean.getHumidity());
         itemCurrWeatherData.temp = DataUtils.getK2C(mainBean.getTemp());
         itemCurrWeatherData.temp_min = DataUtils.getK2C(mainBean.getTemp_min());
         itemCurrWeatherData.temp_max = DataUtils.getK2C(mainBean.getTemp_max());
-        itemCurrWeatherData.wind_speed = windBean.getSpeed() + "m/s";
-        itemCurrWeatherData.clouds_all = cloudsBean.getAll() + "%";
+        itemCurrWeatherData.wind_speed = String.valueOf(windBean.getSpeed());
+        itemCurrWeatherData.clouds_all = String.valueOf( cloudsBean.getAll() );
         itemCurrWeatherData.country = this.data.getName() + "," + sysBean.getCountry();
         itemCurrWeatherData.sunrise = DataUtils.getTime(sysBean.getSunrise());
         itemCurrWeatherData.sunset = DataUtils.getTime(sysBean.getSunset());
