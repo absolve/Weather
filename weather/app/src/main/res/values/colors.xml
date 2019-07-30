@@ -9,7 +9,7 @@
     <color name="partly_cloudy">#f1854b</color>
     <color name="rain_and_sun">#e9b841</color>
     <color name="brown">#a06962</color>
-    <color name="black">#78595e</color>
+    <color name="black">#000</color>
     <color name="mostly_cloudy">#1d9e48</color>
     <color name="lignt_rain">#bda881</color>
     <color name="rain">#999999</color>

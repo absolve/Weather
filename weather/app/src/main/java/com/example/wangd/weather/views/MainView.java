@@ -19,6 +19,7 @@ import com.example.wangd.weather.utils.DataUtils;
  * Created by wangd on 2016/4/24.
  * 显示今天的天气
  */
+@Deprecated
 public class MainView extends LinearLayout {
     private LayoutInflater inflater;
     //温度

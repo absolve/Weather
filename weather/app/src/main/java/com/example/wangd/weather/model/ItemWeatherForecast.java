@@ -9,4 +9,7 @@ public class ItemWeatherForecast {
     public String date;   //日期
     public String min_temp; //最小温度
     public String max_temp; //最大温度
+    public String wind; //风速
+    public String pressure; //气压
+    public String humidity; //湿度
 }

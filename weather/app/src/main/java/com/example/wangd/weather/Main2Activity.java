@@ -14,8 +14,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        btn_show = findViewById(R.id.btn_show);
-        btn_show.setOnClickListener(this);
+
     }
 
     @Override

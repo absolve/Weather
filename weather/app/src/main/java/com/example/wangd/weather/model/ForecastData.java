@@ -9,6 +9,7 @@ import java.util.List;
 /** 心知天气预报返回数据
  * Created by wangd on 2016/7/30.
  */
+@Deprecated
 public class ForecastData implements Parcelable {
 
     /**
