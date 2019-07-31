@@ -4,14 +4,16 @@
     <string name="text_flag">~</string>
     <string name="init_flag">---</string>
     <string name="text2_flag">/</string>
-    <string name="text_celsius">°C</string>
+    <string name="text_celsius">%s°C</string>
+    <string name="text_kelvin">%sK</string>
     <string name="text_wind">Wind:%sm/s</string>
     <string name="text_wind_zh">风速:%sm/s</string>
+    <string name="text_wind_direction">WindDeg:%s</string>
+    <string name="text_wind_direction_zh">风向:%s</string>
     <string name="text_pressure">Pressure:%shPa</string>
     <string name="text_pressure_zh">气压:%shPa</string>
-    <string name="text_humidity">Humidity:%s&#037;</string>
-    <string name="text_humidity_zh">湿度:%s&#037;</string>
-    <string name="img_description">icon</string>
+    <string name="text_humidity">Humidity:%s</string>
+    <string name="text_humidity_zh">湿度:%s</string>
     <string name="text_winddt">Wind direction:%s</string>
     <string name="text_winddt_zh">风向:%s</string>
     <string name="text_sunrise">Sunrise:%s</string>
@@ -19,5 +21,6 @@
     <string name="text_sunset">Sunset:%s</string>
     <string name="text_sunset_zh">日落:%s</string>
 
+    <string name="img_description">icon</string>
     <string name="data_info">Data from Openweathermap and HeWeather.</string>
 </resources>

@@ -10,7 +10,7 @@ import java.util.List;
  * openweather当前天气数据
  * Created by wangd on 2016/6/12.
  */
-public class CurrWeatherData implements Parcelable {
+public class WeatherData implements Parcelable {
 
 
     /**
@@ -628,10 +628,10 @@ public class CurrWeatherData implements Parcelable {
         dest.writeList(this.weather);
     }
 
-    public CurrWeatherData() {
+    public WeatherData() {
     }
 
-    protected CurrWeatherData(Parcel in) {
+    protected WeatherData(Parcel in) {
         this.coord = in.readParcelable(CoordBean.class.getClassLoader());
         this.base = in.readString();
         this.main = in.readParcelable(MainBean.class.getClassLoader());
@@ -648,21 +648,21 @@ public class CurrWeatherData implements Parcelable {
         in.readList(this.weather, WeatherBean.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<CurrWeatherData> CREATOR = new Parcelable.Creator<CurrWeatherData>() {
+    public static final Parcelable.Creator<WeatherData> CREATOR = new Parcelable.Creator<WeatherData>() {
         @Override
-        public CurrWeatherData createFromParcel(Parcel source) {
-            return new CurrWeatherData(source);
+        public WeatherData createFromParcel(Parcel source) {
+            return new WeatherData(source);
         }
 
         @Override
-        public CurrWeatherData[] newArray(int size) {
-            return new CurrWeatherData[size];
+        public WeatherData[] newArray(int size) {
+            return new WeatherData[size];
         }
     };
 
     @Override
     public String toString() {
-        return "CurrWeatherData{" +
+        return "WeatherData{" +
                 "coord=" + coord +
                 ", base='" + base + '\'' +
                 ", main=" + main +

@@ -25,20 +25,25 @@
 
         <activity android:name=".MainActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".Main2Activity">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".Main2Activity"
+            android:configChanges="locale|mcc|mnc|keyboardHidden|orientation|screenSize|keyboard|navigation|fontScale|screenLayout|uiMode|touchscreen">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-        </activity> <!-- 定位需要的服务 -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" />
 
         <meta-data

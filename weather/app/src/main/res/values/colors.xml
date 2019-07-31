@@ -19,6 +19,8 @@
     <color name="thunderstorms">#89766f</color>
     <color name="storm">#343434</color>
     <color name="fog">#75608b</color>
+    <color name="black_grey1">#4D4D4D</color>
+    <color name="black_grey2">#33000000</color>
 
     <color name="blue">#0099cc</color>
     <color name="blue1">#00baf9</color>

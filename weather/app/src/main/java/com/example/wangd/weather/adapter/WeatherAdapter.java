@@ -13,7 +13,7 @@ import com.example.wangd.weather.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.wangd.weather.model.ItemCurrWeatherData;
+import com.example.wangd.weather.model.ItemWeatherData;
 import com.example.wangd.weather.model.ItemWeatherForecast;
 import com.example.wangd.weather.utils.DataUtils;
 
@@ -21,6 +21,7 @@ import com.example.wangd.weather.utils.DataUtils;
  * RecyclerView适配器
  * Created by wangd on 2016/5/21.
  */
+@Deprecated
 public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
@@ -34,7 +35,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //    private AdView gadView;
 
     //数据当前天气的数据
-    private ItemCurrWeatherData currWeatherData = null;
+    private ItemWeatherData currWeatherData = null;
     //天气预报的数据
     private List<ItemWeatherForecast> forecastsList;
 
@@ -69,31 +70,31 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder instanceof ViewHolder1) {
             //头部
             if (currWeatherData != null) {
-                ((ViewHolder1) holder).setTemp(currWeatherData.temp);
-                ((ViewHolder1) holder).setDescription(currWeatherData.weather_main);
-                ((ViewHolder1) holder).setLoc(currWeatherData.country);
-                ((ViewHolder1) holder).setWeatherImg(DataUtils.getWeatherImg(currWeatherData.weather_icon));
-                ((ViewHolder1) holder).setDate(currWeatherData.current_day_week);
+                ((ViewHolder1) holder).setTemp(currWeatherData.getTemp());
+                ((ViewHolder1) holder).setDescription(currWeatherData.getWeather_main());
+                ((ViewHolder1) holder).setLoc(currWeatherData.getCountry());
+                ((ViewHolder1) holder).setWeatherImg(DataUtils.getWeatherImg(currWeatherData.getWeather_icon()));
+                ((ViewHolder1) holder).setDate(currWeatherData.getCurrent_day_week());
             }
         } else if (holder instanceof ViewHolder2) {
             //天气预报信息
             ((ViewHolder2) holder).setStyle(position);
             if (forecastsList.size() != 0) {
-                ((ViewHolder2) holder).setWeather(forecastsList.get(position - 1).weather_description);
-                ((ViewHolder2) holder).setWeatherImg(DataUtils.getWeatherImg(forecastsList.get(position - 1).icon));
-                ((ViewHolder2) holder).setMin_temp(forecastsList.get(position - 1).min_temp);
-                ((ViewHolder2) holder).setMax_temp(forecastsList.get(position - 1).max_temp);
-                ((ViewHolder2) holder).setData(forecastsList.get(position - 1).date);
+                ((ViewHolder2) holder).setWeather(forecastsList.get(position - 1).getWeather_description());
+                ((ViewHolder2) holder).setWeatherImg(DataUtils.getWeatherImg(forecastsList.get(position - 1).getIcon()));
+                ((ViewHolder2) holder).setMin_temp(forecastsList.get(position - 1).getMin_temp());
+                ((ViewHolder2) holder).setMax_temp(forecastsList.get(position - 1).getMax_temp());
+                ((ViewHolder2) holder).setData(forecastsList.get(position - 1).getDate());
             }
         } else if (holder instanceof ViewHolder3) {
             //天气详细信息
             if (currWeatherData != null) {
-                ((ViewHolder3) holder).setHumidity(currWeatherData.humidity);
-                ((ViewHolder3) holder).setPressure(currWeatherData.pressure);
-                ((ViewHolder3) holder).setSunrise(currWeatherData.sunrise);
-                ((ViewHolder3) holder).setSunset(currWeatherData.sunset);
-                ((ViewHolder3) holder).setWindspeed(currWeatherData.wind_speed);
-                ((ViewHolder3) holder).setWinddeg(currWeatherData.wind_deg);
+                ((ViewHolder3) holder).setHumidity(currWeatherData.getHumidity());
+                ((ViewHolder3) holder).setPressure(currWeatherData.getPressure());
+                ((ViewHolder3) holder).setSunrise(currWeatherData.getSunrise());
+                ((ViewHolder3) holder).setSunset(currWeatherData.getSunset());
+                ((ViewHolder3) holder).setWindspeed(currWeatherData.getWind_speed());
+                ((ViewHolder3) holder).setWinddeg(currWeatherData.getWind_deg());
             }
         }
     }
@@ -276,11 +277,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             R.drawable.yuanjiao_style_07, R.drawable.yuanjiao_style_08,
             R.drawable.yuanjiao_style_09, R.drawable.yuanjiao_style_10};
 
-    public ItemCurrWeatherData getCurrWeatherData() {
+    public ItemWeatherData getCurrWeatherData() {
         return currWeatherData;
     }
 
-    public void setCurrWeatherData(ItemCurrWeatherData currWeatherData) {
+    public void setCurrWeatherData(ItemWeatherData currWeatherData) {
         this.currWeatherData = currWeatherData;
         if (currWeatherData != null) {
 //            notifyItemChanged(0);

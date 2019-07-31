@@ -12,7 +12,7 @@ import com.example.wangd.weather.R;
 
 import org.json.JSONObject;
 
-import com.example.wangd.weather.model.CurrWeatherData;
+import com.example.wangd.weather.model.WeatherData;
 import com.example.wangd.weather.utils.DataUtils;
 
 /**
@@ -61,7 +61,7 @@ public class MainView extends LinearLayout {
         this.addView(v);
     }
 
-    public void setData(CurrWeatherData.MainBean mainBean){
+    public void setData(WeatherData.MainBean mainBean){
         String temp1 = DataUtils.getK2C(mainBean.getTemp());
         temp.setText(temp1);
     }

@@ -1,55 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/item_margin"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/item_radius"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
-        app:cardCornerRadius="@dimen/item_radius"
-        app:cardElevation="1dp"
-        app:cardBackgroundColor="@color/white"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:layout_margin="@dimen/item_margin"
+        app:layout_constraintTop_toTopOf="parent"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:gravity="center"
+            >
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:orientation="vertical">
+                android:layout_weight="0.15"
+                android:background="@color/black_grey1"
+                >
 
                 <ImageView
-                    android:id="@+id/iv_icon"
+                    android:id="@+id/iv_img"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:src="@mipmap/img03n"
-                    android:contentDescription="@string/img_description" />
+                    android:contentDescription="@string/img_description"
+                    android:src="@drawable/img03n"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.35000002" />
 
                 <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_img">
 
                     <TextView
                         android:id="@+id/tv_mint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
@@ -64,31 +76,27 @@
                         android:id="@+id/tv_maxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_20" />
 
-                    <TextView
-                        android:id="@+id/tv_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_celsius"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_20" />
                 </LinearLayout>
-            </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/item_weather"
+                android:layout_marginBottom="@dimen/item_weather"
+                >
 
                 <TextView
                     android:id="@+id/tv_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2017"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_18" />
 
@@ -96,34 +104,34 @@
                     android:id="@+id/tv_weather"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="晴天"
-                    android:textColor="@color/black"
+                    android:text=""
+                    android:textColor="@color/black_grey2"
                     android:textSize="@dimen/text_size_18" />
 
                 <TextView
                     android:id="@+id/tv_wind"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="wind"
-                    android:textColor="@color/black"
+                    android:text=""
+                    android:textColor="@color/black_grey2"
                     android:textSize="@dimen/text_size_18" />
 
                 <TextView
                     android:id="@+id/tv_pressure"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="气压"
-                    android:textColor="@color/black"
+                    android:text=""
+                    android:textColor="@color/black_grey2"
                     android:textSize="@dimen/text_size_18" />
 
                 <TextView
                     android:id="@+id/tv_humidity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="湿度"
-                    android:textColor="@color/black"
+                    android:text=""
+                    android:textColor="@color/black_grey2"
                     android:textSize="@dimen/text_size_18" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

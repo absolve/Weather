@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * openweather天气预报的数据
- * Created by wangd on 2016/6/12.
+ * Created by wangd on 2019-7-31 .
  */
 public class WeatherForecastData implements Parcelable {
 

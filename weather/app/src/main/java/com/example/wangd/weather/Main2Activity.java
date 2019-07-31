@@ -13,12 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wangd.weather.adapter.ItemAdapter;
-import com.example.wangd.weather.events.GetCurrWeatherMsgEvent;
+import com.example.wangd.weather.events.GetWeatherMsgEvent;
 import com.example.wangd.weather.events.GetForecastEvent;
 import com.example.wangd.weather.events.LocationEvent;
-import com.example.wangd.weather.model.CurrWeatherData;
-import com.example.wangd.weather.model.ItemCurrWeatherData;
+import com.example.wangd.weather.model.WeatherData;
+import com.example.wangd.weather.model.ItemWeatherData;
 import com.example.wangd.weather.model.ItemWeatherForecast;
+import com.example.wangd.weather.model.WeatherForecastData;
 import com.example.wangd.weather.utils.DataUtils;
 import com.example.wangd.weather.utils.HttpUtil;
 import com.google.gson.Gson;
@@ -36,31 +37,35 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+/**
+ * 主界面
+ */
 public class Main2Activity extends AppCompatActivity implements View.OnClickListener,
-        SwipeRefreshLayout.OnRefreshListener{
+        SwipeRefreshLayout.OnRefreshListener {
 
     public Button btn_show;
     public SwipeRefreshLayout srLayout; //下拉刷新
     public ImageView iv_weatherImg; //天气图片
-    public TextView tv_temperature,tv_tempdec,tv_windspeed,tv_humidity,
-            tv_wind_dt,tv_sunrise,tv_sunset; //温度 天气 风速 湿度 风向 日出 日落
+    public TextView tv_temperature, tv_tempdec, tv_windspeed, tv_humidity,
+            tv_wind_dt, tv_sunrise, tv_sunset; //温度 天气 风速 湿度 风向 日出 日落
     public RecyclerView rv_forecast;//天气预报
     private ItemAdapter adapter; //适配器
     private List<ItemWeatherForecast> data; //天气预报数据
-    private String lang="zh_cn"; //语言
+    private String lang = "zh_cn"; //语言
+    private int cOrk = 0; //0是显示摄氏度 1是显示开氏度
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        srLayout=findViewById(R.id.srLayout);
+        srLayout = findViewById(R.id.srLayout);
         srLayout.setColorSchemeResources(R.color.blue);
         srLayout.setOnRefreshListener(this);
         iv_weatherImg = findViewById(R.id.iv_weatherImg);
         tv_temperature = findViewById(R.id.tv_temperature);
-        tv_tempdec= findViewById(R.id.tv_tempdec);
-        tv_windspeed= findViewById(R.id.tv_windspeed);
-        tv_humidity=findViewById(R.id.tv_humidity);
+        tv_tempdec = findViewById(R.id.tv_tempdec);
+        tv_windspeed = findViewById(R.id.tv_windspeed);
+        tv_humidity = findViewById(R.id.tv_humidity);
         tv_wind_dt = findViewById(R.id.tv_wind_dt);
         tv_sunrise = findViewById(R.id.tv_sunrise);
         tv_sunset = findViewById(R.id.tv_sunset);
@@ -69,9 +74,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         rv_forecast.setLayoutManager(linearLayoutManager);
 
         data = new ArrayList<>();
-        adapter = new ItemAdapter(this,data);
+        adapter = new ItemAdapter(this, data);
         rv_forecast.setAdapter(adapter);
-
     }
 
     @Override
@@ -89,78 +93,103 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     /**
      * 获取当前天气的事件
+     *
      * @param event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(GetCurrWeatherMsgEvent event){
-        if(event.flag == 0 && event.data != null){
-            ItemCurrWeatherData itemCurrWeatherData = event.getItemCurrWeatherData();
-            iv_weatherImg.setImageResource(DataUtils.getWeatherImg(itemCurrWeatherData.weather_icon));
-            tv_temperature.setText(itemCurrWeatherData.temp);
-            tv_tempdec.setText(itemCurrWeatherData.weather_main);
-            if(lang.contentEquals("zh_cn")){
-                String winspeed=String.format(getResources().getString(R.string.text_wind_zh),
-                        itemCurrWeatherData.wind_speed);
-                tv_windspeed.setText(winspeed);
-                String humidity = String.format(getResources().getString(R.string.text_humidity_zh),
-                        itemCurrWeatherData.humidity);
-                tv_humidity.setText(humidity);
-                tv_wind_dt.setText(itemCurrWeatherData.wind_deg);
-                String sunrise=String.format(getResources().getString(R.string.text_sunrise_zh),
-                        itemCurrWeatherData.sunrise);
-                tv_sunrise.setText(sunrise);
-                String sunset = String.format(getResources().getString(R.string.text_sunset_zh),
-                        itemCurrWeatherData.sunset);
-                tv_sunset.setText(sunset);
-            }else{
-                String winspeed=String.format(getResources().getString(R.string.text_wind_zh),
-                        itemCurrWeatherData.wind_speed);
-                tv_windspeed.setText(winspeed);
-                String humidity = String.format(getResources().getString(R.string.text_humidity),
-                        itemCurrWeatherData.humidity);
-                tv_humidity.setText(humidity);
-                tv_wind_dt.setText(itemCurrWeatherData.wind_deg);
-                String sunrise=String.format(getResources().getString(R.string.text_sunrise),
-                        itemCurrWeatherData.sunrise);
-                tv_sunrise.setText(sunrise);
-                String sunset = String.format(getResources().getString(R.string.text_sunset),
-                        itemCurrWeatherData.sunset);
-                tv_sunset.setText(sunset);
+    public void onEvent(GetWeatherMsgEvent event) {
+        if (event.flag == 0) {
+            ItemWeatherData weatherData = event.getWeatherData(); //天气数据
+            iv_weatherImg.setImageResource(DataUtils.getWeatherImg(weatherData.getWeather_icon()));
+            if (cOrk == 0) { //摄氏度
+                String temp = String.format(getResources().getString(R.string.text_celsius),
+                        weatherData.getTemp());
+                tv_temperature.setText(temp);  //温度
+            } else {
+                String temp = String.format(getResources().getString(R.string.text_kelvin),
+                        weatherData.getTemp());
+                tv_temperature.setText(temp);  //温度
             }
+            tv_tempdec.setText(weatherData.getWeather_main()); //天气情况
+            if (lang.contentEquals("zh_cn")) {
+                String winspeed = String.format(getResources().getString(R.string.text_wind_zh),
+                        weatherData.getWind_speed());
+                tv_windspeed.setText(winspeed); //风速
+                String humidity = String.format(getResources().getString(R.string.text_humidity_zh),
+                        weatherData.getHumidity() + "%");
+                tv_humidity.setText(humidity); //湿度
+                String wind_deg = String.format(getResources().getString(R.string.text_wind_direction_zh)
+                        , weatherData.getWind_deg());
+                tv_wind_dt.setText(wind_deg);  //风向
+                String sunrise = String.format(getResources().getString(R.string.text_sunrise_zh),
+                        weatherData.getSunrise());
+                tv_sunrise.setText(sunrise); //日出
+                String sunset = String.format(getResources().getString(R.string.text_sunset_zh),
+                        weatherData.getSunset());
+                tv_sunset.setText(sunset); //日落
+            } else {
+                String winspeed = String.format(getResources().getString(R.string.text_wind),
+                        weatherData.getWind_speed());
+                tv_windspeed.setText(winspeed); //风速
+                String humidity = String.format(getResources().getString(R.string.text_humidity),
+                        weatherData.getHumidity() + "%");
+                tv_humidity.setText(humidity);//湿度
+                String wind_deg = String.format(getResources().getString(R.string.text_wind_direction_zh)
+                        , weatherData.getWind_deg());
+                tv_wind_dt.setText(wind_deg);  //风向
+                String sunrise = String.format(getResources().getString(R.string.text_sunrise),
+                        weatherData.getSunrise());
+                tv_sunrise.setText(sunrise);//日出
+                String sunset = String.format(getResources().getString(R.string.text_sunset),
+                        weatherData.getSunset());
+                tv_sunset.setText(sunset);//日落
+            }
+        }
+        //停止刷新
+        if (srLayout.isRefreshing()) {
+            srLayout.setRefreshing(false);
         }
     }
 
     /**
      * 获取天气预报
+     *
      * @param event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(GetForecastEvent event){
-
+    public void onEvent(GetForecastEvent event) {
+        if (event.flag == 0) {
+            Log.d("---", event.data.toString());
+            adapter.addData(event.data); //设置数据
+        }
+        //停止刷新
+        if (srLayout.isRefreshing()) {
+            srLayout.setRefreshing(false);
+        }
     }
 
     /**
      * 定位消息
+     *
      * @param event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(LocationEvent event){
+    public void onEvent(LocationEvent event) {
 
     }
 
     @Override
     public void onClick(View view) {
-        Snackbar.make(view,"hello",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(view, "hello", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRefresh() {
-
         //当前天气
-        HttpUtil.getCurrweatherOW("fuzhou", "zh_cn", new Callback() {
+        HttpUtil.getCurrweatherOW("fuzhou", lang, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                EventBus.getDefault().post(new GetCurrWeatherMsgEvent(null, 1));
+                EventBus.getDefault().post(new GetWeatherMsgEvent(1));
             }
 
             @Override
@@ -170,20 +199,35 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                     Log.d("--", str);
                     Gson gson = new Gson();
                     try {
-                        CurrWeatherData data = gson.fromJson(str, CurrWeatherData.class);
-                        EventBus.getDefault().post(new GetCurrWeatherMsgEvent(data, 0));
-                    }catch (Exception e){
+                        WeatherData data = gson.fromJson(str, WeatherData.class);
+                        ItemWeatherData temp = DataUtils.getItemWeather(data, lang);
+                        EventBus.getDefault().post(new GetWeatherMsgEvent(temp, 0));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
         });
 
-        //停止刷新
-        if (srLayout.isRefreshing()) {
-            srLayout.setRefreshing(false);
-        }
+        //天气预报
+        HttpUtil.getForecastOW("fuzhou", lang, new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+                    String str = response.body().string();
+                    Log.d("-onResponse-", str);
+                    WeatherForecastData data = gson.fromJson(str, WeatherForecastData.class);
+                    List<ItemWeatherForecast> list = DataUtils.getItemForecast(data, lang);
+                    EventBus.getDefault().post(new GetForecastEvent(list, 0));
+                }
+            }
 
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                EventBus.getDefault().post(new GetForecastEvent(null, 1));
+            }
+        });
 
     }
 }
