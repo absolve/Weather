@@ -22,6 +22,7 @@ import com.example.wangd.weather.model.ItemWeatherForecast;
 import com.example.wangd.weather.model.WeatherForecastData;
 import com.example.wangd.weather.utils.DataUtils;
 import com.example.wangd.weather.utils.HttpUtil;
+import com.example.wangd.weather.views.SimpleItemDecoration;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -52,7 +53,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     private ItemAdapter adapter; //适配器
     private List<ItemWeatherForecast> data; //天气预报数据
     private String lang = "zh_cn"; //语言
-    private int cOrk = 0; //0是显示摄氏度 1是显示开氏度
+    private int cOrk = 0; //0是显示摄氏度 1是显示开氏度 2显示华氏度
+    public ImageView iv_more,iv_loc; //更多的按钮 定位
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +71,14 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         tv_wind_dt = findViewById(R.id.tv_wind_dt);
         tv_sunrise = findViewById(R.id.tv_sunrise);
         tv_sunset = findViewById(R.id.tv_sunset);
+        iv_more = findViewById(R.id.iv_more);
+        iv_more.setOnClickListener(this);
+        iv_loc = findViewById(R.id.iv_loc);
+        iv_loc.setOnClickListener(this);
         rv_forecast = findViewById(R.id.rv_forecast);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rv_forecast.setLayoutManager(linearLayoutManager);
-
+//        rv_forecast.addItemDecoration(new SimpleItemDecoration(this));
         data = new ArrayList<>();
         adapter = new ItemAdapter(this, data);
         rv_forecast.setAdapter(adapter);
@@ -113,7 +119,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             tv_tempdec.setText(weatherData.getWeather_main()); //天气情况
             if (lang.contentEquals("zh_cn")) {
                 String winspeed = String.format(getResources().getString(R.string.text_wind_zh),
-                        weatherData.getWind_speed());
+                        weatherData.getWind_speed(),
+                        DataUtils.getWindSpeed(weatherData.getWind_speed(),true));
                 tv_windspeed.setText(winspeed); //风速
                 String humidity = String.format(getResources().getString(R.string.text_humidity_zh),
                         weatherData.getHumidity() + "%");
@@ -129,7 +136,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 tv_sunset.setText(sunset); //日落
             } else {
                 String winspeed = String.format(getResources().getString(R.string.text_wind),
-                        weatherData.getWind_speed());
+                        weatherData.getWind_speed(),
+                        DataUtils.getWindSpeed(weatherData.getWind_speed(),false));
                 tv_windspeed.setText(winspeed); //风速
                 String humidity = String.format(getResources().getString(R.string.text_humidity),
                         weatherData.getHumidity() + "%");
@@ -180,7 +188,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        Snackbar.make(view, "hello", Snackbar.LENGTH_SHORT).show();
+        if(view.getId()==R.id.iv_more){ //更多
+
+        }
+//        Snackbar.make(view, "hello", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -228,6 +239,5 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 EventBus.getDefault().post(new GetForecastEvent(null, 1));
             }
         });
-
     }
 }

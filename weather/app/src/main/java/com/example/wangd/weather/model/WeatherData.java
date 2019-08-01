@@ -322,14 +322,14 @@ public class WeatherData implements Parcelable {
          * deg : 190
          */
 
-        private int speed;
+        private double speed;
         private int deg;
 
-        public int getSpeed() {
+        public double getSpeed() {
             return speed;
         }
 
-        public void setSpeed(int speed) {
+        public void setSpeed(double speed) {
             this.speed = speed;
         }
 
@@ -348,7 +348,7 @@ public class WeatherData implements Parcelable {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(this.speed);
+            dest.writeDouble(this.speed);
             dest.writeInt(this.deg);
         }
 

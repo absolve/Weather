@@ -3,7 +3,6 @@ package com.example.wangd.weather.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private Context context;
     private String lang = "zh_cn"; //语言 默认中文
     private List<ItemWeatherForecast> data;
-    private int cOrk = 0; //0是显示摄氏度 1是显示开氏度
+    private int tempUnit = 0; //0是显示摄氏度 1是显示开氏度 2是显示华氏度
 
     public ItemAdapter(Context context, List<ItemWeatherForecast> data) {
         this.context = context;
@@ -42,7 +41,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder itemViewHolder, int position) {
-        if (cOrk == 0) {//摄氏度
+        if (tempUnit == 0) {//摄氏度
             String mint = String.format(context.getResources().getString(R.string.text_celsius),
                     data.get(position).getMin_temp());
             itemViewHolder.tv_mint.setText(mint); //最低温度
@@ -64,7 +63,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         itemViewHolder.tv_weather.setText(data.get(position).getWeather_description());
         if (lang.equals("zh_cn")) {
             String wind = String.format(context.getResources().getString(R.string.text_wind_zh),
-                    data.get(position).getWind());
+                    data.get(position).getWind(),
+                    DataUtils.getWindSpeed(data.get(position).getWind(),true));
             itemViewHolder.tv_wind.setText(wind);  //风速
             String pressure = String.format(context.getResources().getString(R.string.text_pressure_zh),
                     data.get(position).getPressure());
@@ -74,7 +74,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             itemViewHolder.tv_humidity.setText(humidity);//湿度
         } else {
             String wind = String.format(context.getResources().getString(R.string.text_wind),
-                    data.get(position).getWind());
+                    data.get(position).getWind(),
+                    DataUtils.getWindSpeed(data.get(position).getWind(),false));
             itemViewHolder.tv_wind.setText(wind);  //风速
             String pressure = String.format(context.getResources().getString(R.string.text_pressure),
                     data.get(position).getPressure());
@@ -98,12 +99,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         this.lang = lang;
     }
 
-    public int getcOrk() {
-        return cOrk;
+    public int getTempUnit() {
+        return tempUnit;
     }
 
-    public void setcOrk(int cOrk) {
-        this.cOrk = cOrk;
+    public void setTempUnit(int tempUnit) {
+        this.tempUnit = tempUnit;
     }
 
     /**

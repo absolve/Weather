@@ -8,11 +8,13 @@
     <dimen name="item_15dp">15dp</dimen>
     <dimen name="item_5dp">5dp</dimen>
     <dimen name="item_3dp">3dp</dimen>
-
+    <dimen name="item_2dp">2dp</dimen>
+    <dimen name="item_1dp">1dp</dimen>
     <dimen name="item_weather">5dp</dimen>
     <dimen name="item_radius">10dp</dimen>
     <dimen name="item_margin">10dp</dimen>
     <dimen name="item_round">8dp</dimen>
+    <dimen name="item_divider">10dp</dimen>
 
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_13">13sp</dimen>

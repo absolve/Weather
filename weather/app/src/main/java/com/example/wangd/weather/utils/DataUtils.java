@@ -106,12 +106,12 @@ public class DataUtils {
         WeatherData.SysBean sysBean = data.getSys();
         List<WeatherData.WeatherBean> weatherBean = data.getWeather();
         ItemWeatherData WeatherData = new ItemWeatherData();
-        WeatherData.setPressure(String.valueOf(mainBean.getPressure()));
-        WeatherData.setHumidity(String.valueOf(mainBean.getHumidity()));
-        WeatherData.setTemp(DataUtils.getK2C(mainBean.getTemp()));
+        WeatherData.setPressure(String.valueOf(mainBean.getPressure())); //气压
+        WeatherData.setHumidity(String.valueOf(mainBean.getHumidity())); //适度
+        WeatherData.setTemp(DataUtils.getK2C(mainBean.getTemp())); //温度
         WeatherData.setTemp_min(DataUtils.getK2C(mainBean.getTemp_min()));
         WeatherData.setTemp_max(DataUtils.getK2C(mainBean.getTemp_max()));
-        WeatherData.setWind_speed(String.valueOf(windBean.getSpeed()));
+        WeatherData.setWind_speed(String.valueOf(windBean.getSpeed()));  //风速
         WeatherData.setClouds_all(String.valueOf(cloudsBean.getAll()));
         WeatherData.setCountry(data.getName() + "," + sysBean.getCountry());
         WeatherData.setSunrise(DataUtils.getTime(sysBean.getSunrise()));
@@ -227,6 +227,43 @@ public class DataUtils {
     }
 
     /**
+     * @param speed 风速  单位 m/s
+     * @param zh_cn 是否中文
+     * @return 风速
+     */
+    public static String getWindSpeed(String speed, boolean zh_cn) {
+        double wind = Double.valueOf(speed);
+        if (wind <= 0.2) {
+            return !zh_cn ? "Calm" : "无风";
+        } else if (0.3 <= wind && wind <= 1.5) {
+            return !zh_cn ? "Light air" : "软风";
+        } else if (1.6 <= wind && wind <= 3.3) {
+            return !zh_cn ? "Light breeze" : "轻风";
+        } else if (3.4 <= wind && wind <= 5.4) {
+            return !zh_cn ? "Gentle breeze" : "微风";
+        } else if (5.5 <= wind && wind <= 7.9) {
+            return !zh_cn ? "Moderate breeze" : "和风";
+        } else if (8.0 <= wind && wind <= 10.7) {
+            return !zh_cn ? "Fresh breeze" : "清风";
+        } else if (10.0 <= wind && wind <= 13.8) {
+            return !zh_cn ? "Strong breeze" : "强风";
+        } else if (13.9 <= wind && wind <= 17.1) {
+            return !zh_cn ? "Moderate gale" : "疾风";
+        } else if (17.2 <= wind && wind <= 20.7) {
+            return !zh_cn ? "Fresh gale" : "大风";
+        } else if (20.8 <= wind && wind <= 24.4) {
+            return !zh_cn ? "Strong gale" : "烈风";
+        } else if (24.5 <= wind && wind <= 28.4) {
+            return !zh_cn ? "Whole gale" : "狂风";
+        } else if (28.5 <= wind && wind <= 32.6) {
+            return !zh_cn ? "Storm" : "暴风";
+        } else {
+            return !zh_cn ? "Hurricane" : "飓风";
+        }
+    }
+
+
+    /**
      * 获取当前时间的星期
      *
      * @param zh_cn 是否中文
@@ -289,55 +326,55 @@ public class DataUtils {
                 img = !isgrey ? R.drawable.img01d : R.drawable.img01d_grey;
                 break;
             case "01n":
-                img = !isgrey ?R.drawable.img01n:R.drawable.img01n_grey;
+                img = !isgrey ? R.drawable.img01n : R.drawable.img01n_grey;
                 break;
             case "02d":
-                img = !isgrey ?R.drawable.img02d:R.drawable.img02d_grey;
+                img = !isgrey ? R.drawable.img02d : R.drawable.img02d_grey;
                 break;
             case "02n":
-                img = !isgrey ?R.drawable.img02n:R.drawable.img02n_grey;
+                img = !isgrey ? R.drawable.img02n : R.drawable.img02n_grey;
                 break;
             case "03d":
-                img = !isgrey ?R.drawable.img03d:R.drawable.img03d_grey;
+                img = !isgrey ? R.drawable.img03d : R.drawable.img03d_grey;
                 break;
             case "03n":
-                img = !isgrey ?R.drawable.img03n:R.drawable.img03n_grey;
+                img = !isgrey ? R.drawable.img03n : R.drawable.img03n_grey;
                 break;
             case "04d":  //碎云
-                img = !isgrey ?R.drawable.img03d:R.drawable.img03d_grey;
+                img = !isgrey ? R.drawable.img03d : R.drawable.img03d_grey;
                 break;
             case "04n":
-                img = !isgrey ?R.drawable.img03d:R.drawable.img03d_grey;
+                img = !isgrey ? R.drawable.img03d : R.drawable.img03d_grey;
                 break;
             case "09d":
-                img = !isgrey ?R.drawable.img09d:R.drawable.img09d_grey;
+                img = !isgrey ? R.drawable.img09d : R.drawable.img09d_grey;
                 break;
             case "09n":
-                img = !isgrey ?R.drawable.img09n:R.drawable.img09n_grey;
+                img = !isgrey ? R.drawable.img09n : R.drawable.img09n_grey;
                 break;
             case "10d":
-                img = !isgrey ?R.drawable.img10d:R.drawable.img10d_grey;
+                img = !isgrey ? R.drawable.img10d : R.drawable.img10d_grey;
                 break;
             case "10n":
-                img = !isgrey ?R.drawable.img10n:R.drawable.img10n_grey;
+                img = !isgrey ? R.drawable.img10n : R.drawable.img10n_grey;
                 break;
             case "11d":
-                img = !isgrey ?R.drawable.img11d:R.drawable.img11d_grey;
+                img = !isgrey ? R.drawable.img11d : R.drawable.img11d_grey;
                 break;
             case "11n":
-                img = !isgrey ?R.drawable.img11n:R.drawable.img11n_grey;
+                img = !isgrey ? R.drawable.img11n : R.drawable.img11n_grey;
                 break;
             case "13d":
-                img = !isgrey ?R.drawable.img13d:R.drawable.img13d_grey;
+                img = !isgrey ? R.drawable.img13d : R.drawable.img13d_grey;
                 break;
             case "13n":
-                img = !isgrey ?R.drawable.img13n:R.drawable.img13n_grey;
+                img = !isgrey ? R.drawable.img13n : R.drawable.img13n_grey;
                 break;
             case "50d":
-                img = !isgrey ?R.drawable.img50d:R.drawable.img50d_grey;
+                img = !isgrey ? R.drawable.img50d : R.drawable.img50d_grey;
                 break;
             case "50n":
-                img = !isgrey ?R.drawable.img50n:R.drawable.img50n_grey;
+                img = !isgrey ? R.drawable.img50n : R.drawable.img50n_grey;
                 break;
         }
         return img;
