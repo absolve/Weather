@@ -58,7 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             itemViewHolder.tv_maxt.setText(maxt); //最高温度
         }
         //天气图片
-        Picasso.with(context).load(DataUtils.getWeatherImg(data.get(position).getIcon())).fit().into(itemViewHolder.iv_icon);
+        Picasso.with(context).load(DataUtils.getWeatherImg(data.get(position).getIcon(),true)).fit().into(itemViewHolder.iv_icon);
 
         itemViewHolder.tv_date.setText(data.get(position).getDate());
         itemViewHolder.tv_weather.setText(data.get(position).getWeather_description());

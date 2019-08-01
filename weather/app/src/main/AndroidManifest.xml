@@ -33,6 +33,7 @@
 
         <activity
             android:name=".Main2Activity"
+            android:screenOrientation="portrait"
             android:configChanges="locale|mcc|mnc|keyboardHidden|orientation|screenSize|keyboard|navigation|fontScale|screenLayout|uiMode|touchscreen">
 
             <intent-filter>

@@ -73,7 +73,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ((ViewHolder1) holder).setTemp(currWeatherData.getTemp());
                 ((ViewHolder1) holder).setDescription(currWeatherData.getWeather_main());
                 ((ViewHolder1) holder).setLoc(currWeatherData.getCountry());
-                ((ViewHolder1) holder).setWeatherImg(DataUtils.getWeatherImg(currWeatherData.getWeather_icon()));
+                ((ViewHolder1) holder).setWeatherImg(DataUtils.getWeatherImg(currWeatherData.getWeather_icon(),false));
                 ((ViewHolder1) holder).setDate(currWeatherData.getCurrent_day_week());
             }
         } else if (holder instanceof ViewHolder2) {
@@ -81,7 +81,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ViewHolder2) holder).setStyle(position);
             if (forecastsList.size() != 0) {
                 ((ViewHolder2) holder).setWeather(forecastsList.get(position - 1).getWeather_description());
-                ((ViewHolder2) holder).setWeatherImg(DataUtils.getWeatherImg(forecastsList.get(position - 1).getIcon()));
+                ((ViewHolder2) holder).setWeatherImg(DataUtils.getWeatherImg(forecastsList.get(position - 1).getIcon(),false));
                 ((ViewHolder2) holder).setMin_temp(forecastsList.get(position - 1).getMin_temp());
                 ((ViewHolder2) holder).setMax_temp(forecastsList.get(position - 1).getMax_temp());
                 ((ViewHolder2) holder).setData(forecastsList.get(position - 1).getDate());

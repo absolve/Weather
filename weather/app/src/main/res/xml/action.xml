@@ -16,6 +16,13 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
+
+
+        <!--<Constraint-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
         <Constraint
             android:id="@+id/view_content"
             android:layout_width="match_parent"
@@ -38,6 +45,13 @@
 
     </ConstraintSet>
     <ConstraintSet android:id="@+id/end">
+        <!--<Constraint-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="gone"-->
+            <!--/>-->
+
         <Constraint
             android:id="@+id/view_content"
             android:layout_width="match_parent"

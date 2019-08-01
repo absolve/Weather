@@ -9,6 +9,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/item_margin"
         app:cardBackgroundColor="@color/white"
+        android:focusable="true"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
         app:cardCornerRadius="@dimen/item_radius"
         app:cardElevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,15 +34,17 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="0.15"
-                android:background="@color/black_grey1"
                 >
 
                 <ImageView
                     android:id="@+id/iv_img"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
                     android:contentDescription="@string/img_description"
-                    android:src="@drawable/img03n"
+                    android:src="@drawable/img03n_grey"
+                    android:background="@drawable/round_style_white"
+                    android:elevation="4dp"
+                    android:padding="@dimen/item_3dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -62,14 +67,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_grey3"
                         android:textSize="@dimen/text_size_20" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/text2_flag"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_grey3"
                         android:textSize="@dimen/text_size_20" />
 
                     <TextView
@@ -77,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_grey3"
                         android:textSize="@dimen/text_size_20" />
 
                 </LinearLayout>
@@ -97,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_grey3"
                     android:textSize="@dimen/text_size_18" />
 
                 <TextView

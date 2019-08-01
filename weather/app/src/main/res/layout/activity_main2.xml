@@ -1,5 +1,6 @@
 <android.support.constraint.motion.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/action">
@@ -22,41 +23,41 @@
         android:elevation="4dp"
         android:orientation="vertical"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/srLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_style"
             android:layout_marginStart="@dimen/activity_vertical_margin"
             android:layout_marginTop="65dp"
             android:layout_marginEnd="@dimen/activity_vertical_margin"
             android:layout_marginBottom="@dimen/item_15dp"
-            android:padding="@dimen/activity_vertical_margin"
+            android:background="@drawable/round_style"
             android:elevation="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/activity_vertical_margin">
 
             <ImageView
                 android:id="@+id/iv_weatherImg"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:src="@drawable/img01d"
-                android:background="@drawable/round_style"
                 android:layout_marginTop="@dimen/item_5dp"
-                android:padding="@dimen/item_5dp"
+                android:background="@drawable/round_style"
+                android:contentDescription="@string/img_description"
                 android:elevation="8dp"
-                android:contentDescription="@string/img_description" />
+                android:padding="@dimen/item_5dp"
+                android:src="@drawable/img01d" />
 
             <TextView
                 android:id="@+id/tv_temperature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="26"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_50" />
 
@@ -64,7 +65,7 @@
                 android:id="@+id/tv_tempdec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="晴"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
 
@@ -72,7 +73,7 @@
                 android:id="@+id/tv_windspeed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="10m/s"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
 
@@ -80,7 +81,7 @@
                 android:id="@+id/tv_humidity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="10%"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
 
@@ -88,7 +89,7 @@
                 android:id="@+id/tv_wind_dt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="北风"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_17" />
 
@@ -102,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:text="日出1:0"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_17" />
 
@@ -111,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="日落2:0"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_17" />
             </LinearLayout>

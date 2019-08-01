@@ -100,7 +100,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     public void onEvent(GetWeatherMsgEvent event) {
         if (event.flag == 0) {
             ItemWeatherData weatherData = event.getWeatherData(); //天气数据
-            iv_weatherImg.setImageResource(DataUtils.getWeatherImg(weatherData.getWeather_icon()));
+            iv_weatherImg.setImageResource(DataUtils.getWeatherImg(weatherData.getWeather_icon(),false));
             if (cOrk == 0) { //摄氏度
                 String temp = String.format(getResources().getString(R.string.text_celsius),
                         weatherData.getTemp());

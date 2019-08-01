@@ -276,61 +276,68 @@ public class DataUtils {
     /**
      * 获取天气图标
      *
-     * @param icon 天气图标的代码
-     *             openweathermap的天气代码
+     * @param icon   天气图标的代码
+     *               openweathermap的天气代码
+     * @param isgrey 是否背景为灰色
      * @return 图片的id
      */
-    public static int getWeatherImg(String icon) {
+    public static int getWeatherImg(String icon, boolean isgrey) {
         //默认设置成太阳
         int img = R.drawable.img01d;
         switch (icon) {
             case "01d":
-                img = R.drawable.img01d;
+                img = !isgrey ? R.drawable.img01d : R.drawable.img01d_grey;
                 break;
             case "01n":
-                img = R.drawable.img01n;
+                img = !isgrey ?R.drawable.img01n:R.drawable.img01n_grey;
                 break;
             case "02d":
-                img = R.drawable.img02d;
+                img = !isgrey ?R.drawable.img02d:R.drawable.img02d_grey;
                 break;
             case "02n":
-                img = R.drawable.img02n;
+                img = !isgrey ?R.drawable.img02n:R.drawable.img02n_grey;
                 break;
             case "03d":
-                img = R.drawable.img03d;
+                img = !isgrey ?R.drawable.img03d:R.drawable.img03d_grey;
                 break;
             case "03n":
-                img = R.drawable.img03n;
+                img = !isgrey ?R.drawable.img03n:R.drawable.img03n_grey;
+                break;
+            case "04d":  //碎云
+                img = !isgrey ?R.drawable.img03d:R.drawable.img03d_grey;
+                break;
+            case "04n":
+                img = !isgrey ?R.drawable.img03d:R.drawable.img03d_grey;
                 break;
             case "09d":
-                img = R.drawable.img09d;
+                img = !isgrey ?R.drawable.img09d:R.drawable.img09d_grey;
                 break;
             case "09n":
-                img = R.drawable.img09n;
+                img = !isgrey ?R.drawable.img09n:R.drawable.img09n_grey;
                 break;
             case "10d":
-                img = R.drawable.img10d;
+                img = !isgrey ?R.drawable.img10d:R.drawable.img10d_grey;
                 break;
             case "10n":
-                img = R.drawable.img10n;
+                img = !isgrey ?R.drawable.img10n:R.drawable.img10n_grey;
                 break;
             case "11d":
-                img = R.drawable.img11d;
+                img = !isgrey ?R.drawable.img11d:R.drawable.img11d_grey;
                 break;
             case "11n":
-                img = R.drawable.img11n;
+                img = !isgrey ?R.drawable.img11n:R.drawable.img11n_grey;
                 break;
             case "13d":
-                img = R.drawable.img13d;
+                img = !isgrey ?R.drawable.img13d:R.drawable.img13d_grey;
                 break;
             case "13n":
-                img = R.drawable.img13n;
+                img = !isgrey ?R.drawable.img13n:R.drawable.img13n_grey;
                 break;
             case "50d":
-                img = R.drawable.img50d;
+                img = !isgrey ?R.drawable.img50d:R.drawable.img50d_grey;
                 break;
             case "50n":
-                img = R.drawable.img50n;
+                img = !isgrey ?R.drawable.img50n:R.drawable.img50n_grey;
                 break;
         }
         return img;

@@ -7,6 +7,7 @@
     <dimen name="item_20dp">20dp</dimen>
     <dimen name="item_15dp">15dp</dimen>
     <dimen name="item_5dp">5dp</dimen>
+    <dimen name="item_3dp">3dp</dimen>
 
     <dimen name="item_weather">5dp</dimen>
     <dimen name="item_radius">10dp</dimen>
