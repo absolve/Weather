@@ -233,29 +233,29 @@ public class DataUtils {
      */
     public static String getWindSpeed(String speed, boolean zh_cn) {
         double wind = Double.valueOf(speed);
-        if (wind <= 0.2) {
+        if (wind < 0.3) {
             return !zh_cn ? "Calm" : "无风";
-        } else if (0.3 <= wind && wind <= 1.5) {
+        } else if (0.3 <= wind && wind < 1.6) {
             return !zh_cn ? "Light air" : "软风";
-        } else if (1.6 <= wind && wind <= 3.3) {
+        } else if (1.6 <= wind && wind < 3.4) {
             return !zh_cn ? "Light breeze" : "轻风";
-        } else if (3.4 <= wind && wind <= 5.4) {
+        } else if (3.4 <= wind && wind < 5.5) {
             return !zh_cn ? "Gentle breeze" : "微风";
-        } else if (5.5 <= wind && wind <= 7.9) {
+        } else if (5.5 <= wind && wind < 8.0) {
             return !zh_cn ? "Moderate breeze" : "和风";
-        } else if (8.0 <= wind && wind <= 10.7) {
+        } else if (8.0 <= wind && wind < 10.8) {
             return !zh_cn ? "Fresh breeze" : "清风";
-        } else if (10.0 <= wind && wind <= 13.8) {
+        } else if (10.8 <= wind && wind < 13.9) {
             return !zh_cn ? "Strong breeze" : "强风";
-        } else if (13.9 <= wind && wind <= 17.1) {
+        } else if (13.9 <= wind && wind < 17.2) {
             return !zh_cn ? "Moderate gale" : "疾风";
-        } else if (17.2 <= wind && wind <= 20.7) {
+        } else if (17.2 <= wind && wind < 20.8) {
             return !zh_cn ? "Fresh gale" : "大风";
-        } else if (20.8 <= wind && wind <= 24.4) {
+        } else if (20.8 <= wind && wind < 24.5) {
             return !zh_cn ? "Strong gale" : "烈风";
-        } else if (24.5 <= wind && wind <= 28.4) {
+        } else if (24.5 <= wind && wind < 28.5) {
             return !zh_cn ? "Whole gale" : "狂风";
-        } else if (28.5 <= wind && wind <= 32.6) {
+        } else if (28.5 <= wind && wind < 32.7) {
             return !zh_cn ? "Storm" : "暴风";
         } else {
             return !zh_cn ? "Hurricane" : "飓风";
