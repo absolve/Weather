@@ -2,14 +2,19 @@ package com.example.wangd.weather;
 
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.wangd.weather.adapter.ItemAdapter;
@@ -45,6 +50,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         SwipeRefreshLayout.OnRefreshListener {
 
     public Button btn_show;
+    public View toolbar; //工具栏
     public SwipeRefreshLayout srLayout; //下拉刷新
     public ImageView iv_weatherImg; //天气图片
     public TextView tv_temperature, tv_tempdec, tv_windspeed, tv_humidity,
@@ -55,11 +61,13 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     private String lang = "zh_cn"; //语言
     private int cOrk = 0; //0是显示摄氏度 1是显示开氏度 2显示华氏度
     public ImageView iv_more,iv_loc; //更多的按钮 定位
+    private PopupWindow popupWindow;  //弹出框
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        toolbar = findViewById(R.id.toolbar);
         srLayout = findViewById(R.id.srLayout);
         srLayout.setColorSchemeResources(R.color.blue);
         srLayout.setOnRefreshListener(this);
@@ -83,6 +91,40 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         adapter = new ItemAdapter(this, data);
         rv_forecast.setAdapter(adapter);
     }
+
+    /**
+     * 显示弹出框
+     */
+    public void showPopupWindow(){
+        if(popupWindow==null){
+            LayoutInflater layoutInflater = LayoutInflater.from(this);
+            View view = layoutInflater.inflate(R.layout.popup_window, null);
+            view.findViewById(R.id.tv_about).setOnClickListener(this);//关于的按钮
+            popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            popupWindow.setOutsideTouchable(true);
+            popupWindow.setFocusable(true);
+
+            int offx = getResources().getDimensionPixelOffset(R.dimen.item_5dp);
+            int offy=offx;
+            int statusbar = getResources().getIdentifier("status_bar_height",
+                    "dimen", "android"); //状态栏
+            if(statusbar>0){
+                offy+= getResources().getDimensionPixelSize(statusbar);
+            }
+            popupWindow.showAtLocation(toolbar,Gravity.TOP|Gravity.END,offx,offy);
+        }else{
+            int offx = getResources().getDimensionPixelOffset(R.dimen.item_5dp);
+            int offy=offx;
+            int statusbar = getResources().getIdentifier("status_bar_height",
+                    "dimen", "android"); //状态栏
+            if(statusbar>0){
+                offy+= getResources().getDimensionPixelSize(statusbar);
+            }
+            popupWindow.showAtLocation(toolbar,Gravity.TOP|Gravity.END,offx,offy);
+        }
+    }
+
 
     @Override
     protected void onStart() {
@@ -189,7 +231,13 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.iv_more){ //更多
-
+            showPopupWindow();
+        }else if(view.getId()==R.id.tv_about){ //关于按钮
+            if(popupWindow!=null&&popupWindow.isShowing()){
+                popupWindow.dismiss();
+            }
+            new AlertDialog.Builder(this).setTitle("关于").
+                    setMessage(getResources().getString(R.string.text_info)).show();
         }
 //        Snackbar.make(view, "hello", Snackbar.LENGTH_SHORT).show();
     }

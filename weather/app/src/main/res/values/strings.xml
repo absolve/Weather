@@ -21,6 +21,8 @@
     <string name="text_sunrise_zh">日出:&#160;%s</string>
     <string name="text_sunset">Sunset:&#160;%s</string>
     <string name="text_sunset_zh">日落:&#160;%s</string>
+    <string name="text_about">关于</string>
+    <string name="text_info">天气app是开源项目\n天气数据来源Openweathermap\ngithub:https://github.com/absolve/Weather</string>
 
     <string name="img_description">icon</string>
     <string name="data_info">Data from Openweathermap and HeWeather.</string>
