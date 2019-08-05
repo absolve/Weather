@@ -102,19 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        initLocationClient();
         //开始定位
 //        mLocationClient.startLocation();
-//        HttpUtil.getCurrweather("beijing", new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                if (response.isSuccessful()) {
-//                    Log.d("--", response.body().string());
-//                }
-//            }
-//        });
 
     }
 
