@@ -175,10 +175,9 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onLocationChanged(AMapLocation location) {
             if (null != location) {
-                StringBuffer sb = new StringBuffer();
+//                StringBuffer sb = new StringBuffer();
                 //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
                 if (location.getErrorCode() == 0) {
-                    showToast("定位成功", 0);
                     if (!location.getCountry().contentEquals("中国")) {
                         lang = "en";
                     }
@@ -484,6 +483,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     public void onEvent(LocationEvent event) {
         locationClient.stopLocation(); //停止定位
         if (event.flag == 0) { //成功
+            showToast("定位成功", 0);
             tempLocation = event; //保留定位
             tv_location.setText(event.cityName);
             getWeatherData(String.valueOf(event.Latitude), String.valueOf(event.Longitude));
