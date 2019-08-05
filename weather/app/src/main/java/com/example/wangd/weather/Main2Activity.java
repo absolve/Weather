@@ -125,6 +125,80 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * 显示提示信息
+     * @param msg  信息
+     * @param time 时间  0是短暂 1是较长
+     */
+    public void showToast(String msg,int time){
+        if(time==0){
+            Snackbar.make(toolbar, msg, Snackbar.LENGTH_SHORT).show();
+        }else if(time==1){
+            Snackbar.make(toolbar, msg, Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * 获取天气信息
+     * @param cityname 城市名字
+     */
+    public void getWeatherData(String cityname){
+        //当前天气
+        HttpUtil.getCurrweatherOW(cityname, lang, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                EventBus.getDefault().post(new GetWeatherMsgEvent(1));
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    try {
+                        String str = response.body().string();
+                        Log.d("--", str);
+                        Gson gson = new Gson();
+                        WeatherData data = gson.fromJson(str, WeatherData.class);
+                        ItemWeatherData temp = DataUtils.getItemWeather(data, lang);
+                        EventBus.getDefault().post(new GetWeatherMsgEvent(temp, 0));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        EventBus.getDefault().post(new GetWeatherMsgEvent(1));
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * 获取天气预报
+     * @param cityname 城市名字
+     */
+    public void getForecastData(String cityname){
+        HttpUtil.getForecastOW(cityname, lang, new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    try {
+                        Gson gson = new Gson();
+                        String str = response.body().string();
+                        Log.d("-onResponse-", str);
+                        WeatherForecastData data = gson.fromJson(str, WeatherForecastData.class);
+                        List<ItemWeatherForecast> list = DataUtils.getItemForecast(data, lang);
+                        EventBus.getDefault().post(new GetForecastEvent(list, 0));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        EventBus.getDefault().post(new GetForecastEvent(null, 1));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                EventBus.getDefault().post(new GetForecastEvent(null, 1));
+            }
+        });
+    }
+
 
     @Override
     protected void onStart() {
@@ -147,6 +221,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(GetWeatherMsgEvent event) {
         if (event.flag == 0) {
+            showToast("获取成功",0);
             ItemWeatherData weatherData = event.getWeatherData(); //天气数据
             iv_weatherImg.setImageResource(DataUtils.getWeatherImg(weatherData.getWeather_icon(),false));
             if (cOrk == 0) { //摄氏度
@@ -194,6 +269,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                         weatherData.getSunset());
                 tv_sunset.setText(sunset);//日落
             }
+        }else{
+            showToast("获取当前天气失败",1);
         }
         //停止刷新
         if (srLayout.isRefreshing()) {
@@ -211,6 +288,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         if (event.flag == 0) {
             Log.d("---", event.data.toString());
             adapter.addData(event.data); //设置数据
+        }else{
+            showToast("获取天气预报失败",1);
         }
         //停止刷新
         if (srLayout.isRefreshing()) {
@@ -242,50 +321,15 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 //        Snackbar.make(view, "hello", Snackbar.LENGTH_SHORT).show();
     }
 
+    /**
+     * 刷新事件
+     */
     @Override
     public void onRefresh() {
         //当前天气
-        HttpUtil.getCurrweatherOW("fuzhou", lang, new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                EventBus.getDefault().post(new GetWeatherMsgEvent(1));
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String str = response.body().string();
-                    Log.d("--", str);
-                    Gson gson = new Gson();
-                    try {
-                        WeatherData data = gson.fromJson(str, WeatherData.class);
-                        ItemWeatherData temp = DataUtils.getItemWeather(data, lang);
-                        EventBus.getDefault().post(new GetWeatherMsgEvent(temp, 0));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+        getWeatherData("fuzhou");
 
         //天气预报
-        HttpUtil.getForecastOW("fuzhou", lang, new Callback() {
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    Gson gson = new Gson();
-                    String str = response.body().string();
-                    Log.d("-onResponse-", str);
-                    WeatherForecastData data = gson.fromJson(str, WeatherForecastData.class);
-                    List<ItemWeatherForecast> list = DataUtils.getItemForecast(data, lang);
-                    EventBus.getDefault().post(new GetForecastEvent(list, 0));
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                EventBus.getDefault().post(new GetForecastEvent(null, 1));
-            }
-        });
+        getForecastData("fuzhou");
     }
 }

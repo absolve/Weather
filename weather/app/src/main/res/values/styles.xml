@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/blue1</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
