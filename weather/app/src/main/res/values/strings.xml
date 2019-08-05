@@ -4,7 +4,26 @@
     <string name="text_flag">~</string>
     <string name="init_flag">---</string>
     <string name="text2_flag">/</string>
-    <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
-    <!--<string name="my_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
+    <string name="text_celsius">%s°C</string>
+    <string name="text_kelvin">%sK</string>
+    <string name="text_Fahrenheit">%s°F</string>
+    <string name="text_wind">Wind:&#160;%sm/s,%s</string>
+    <string name="text_wind_zh">风速:&#160;%sm/s,%s</string>
+    <string name="text_wind_direction">WindDeg:&#160;%s</string>
+    <string name="text_wind_direction_zh">风向:&#160;%s</string>
+    <string name="text_pressure">Pressure:&#160;%shPa</string>
+    <string name="text_pressure_zh">气压:&#160;%shPa</string>
+    <string name="text_humidity">Humidity:&#160;%s</string>
+    <string name="text_humidity_zh">湿度:&#160;%s</string>
+    <string name="text_winddt">Wind direction:&#160;%s</string>
+    <string name="text_winddt_zh">风向:&#160;%s</string>
+    <string name="text_sunrise">Sunrise:&#160;%s</string>
+    <string name="text_sunrise_zh">日出:&#160;%s</string>
+    <string name="text_sunset">Sunset:&#160;%s</string>
+    <string name="text_sunset_zh">日落:&#160;%s</string>
+    <string name="text_about">关于</string>
+    <string name="text_info">天气app是开源项目\n天气数据来源Openweathermap\ngithub:https://github.com/absolve/Weather</string>
+
+    <string name="img_description">icon</string>
     <string name="data_info">Data from Openweathermap and HeWeather.</string>
 </resources>

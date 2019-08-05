@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/item_margin"
         android:layout_marginRight="@dimen/item_margin"
-        android:src="@mipmap/img03n" />
+         />
 
     <LinearLayout
         android:layout_width="match_parent"

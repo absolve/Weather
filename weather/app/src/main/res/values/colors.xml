@@ -9,7 +9,7 @@
     <color name="partly_cloudy">#f1854b</color>
     <color name="rain_and_sun">#e9b841</color>
     <color name="brown">#a06962</color>
-    <color name="black">#78595e</color>
+    <color name="black">#000</color>
     <color name="mostly_cloudy">#1d9e48</color>
     <color name="lignt_rain">#bda881</color>
     <color name="rain">#999999</color>
@@ -19,6 +19,9 @@
     <color name="thunderstorms">#89766f</color>
     <color name="storm">#343434</color>
     <color name="fog">#75608b</color>
+    <color name="black_grey1">#4D4D4D</color>
+    <color name="black_grey2">#33000000</color>
+    <color name="black_grey3">#757575</color>
 
     <color name="blue">#0099cc</color>
     <color name="blue1">#00baf9</color>

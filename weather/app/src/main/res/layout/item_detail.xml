@@ -25,7 +25,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/img202" />
+            android:src="@drawable/img202" />
         <!--风速-->
         <TextView
             android:id="@+id/windspeed"
@@ -72,7 +72,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:src="@mipmap/pressureimg" />
+                android:src="@drawable/pressureimg" />
 
             <TextView
                 android:id="@+id/pressure"
@@ -97,7 +97,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:src="@mipmap/ic_dewpoint1" />
+                android:src="@drawable/ic_dewpoint1" />
 
             <TextView
                 android:id="@+id/humidity"
@@ -122,7 +122,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:src="@mipmap/ic_astronomy1" />
+                android:src="@drawable/ic_astronomy1" />
 
             <TextView
                 android:id="@+id/sunrise"

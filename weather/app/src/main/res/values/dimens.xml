@@ -1,9 +1,23 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">10dp</dimen>
+
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="item_40dp">40dp</dimen>
+    <dimen name="item_20dp">20dp</dimen>
+    <dimen name="item_15dp">15dp</dimen>
+    <dimen name="item_12dp">12dp</dimen>
+    <dimen name="item_10dp">10dp</dimen>
+    <dimen name="item_5dp">5dp</dimen>
+    <dimen name="item_3dp">3dp</dimen>
+    <dimen name="item_2dp">2dp</dimen>
+    <dimen name="item_1dp">1dp</dimen>
+    <dimen name="item_weather">5dp</dimen>
+    <dimen name="item_radius">10dp</dimen>
     <dimen name="item_margin">10dp</dimen>
+    <dimen name="item_round">8dp</dimen>
+    <dimen name="item_divider">10dp</dimen>
 
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_13">13sp</dimen>
@@ -22,6 +36,8 @@
     <dimen name="text_size_26">26sp</dimen>
     <dimen name="text_size_27">27sp</dimen>
     <dimen name="text_size_28">28sp</dimen>
+    <dimen name="text_size_29">29sp</dimen>
+    <dimen name="text_size_30">30sp</dimen>
     <dimen name="text_size_40">40sp</dimen>
     <dimen name="text_size_50">50sp</dimen>
     <dimen name="text_size_60">60sp</dimen>
