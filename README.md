@@ -6,7 +6,7 @@
 最近修改了原来的界面  
 截图  
 新版  
-
+<img src="https://github.com/absolve/Weather/blob/master/device-2019-08-05-105406.png" width="540" height="960"/>
 
 <img src="https://github.com/absolve/Weather/blob/master/180807_wmZk_2000932.png" width="375" height="640"/>
 <img src="https://github.com/absolve/Weather/blob/master/180829_VmRD_2000932.png" width="375" height="640"/>
