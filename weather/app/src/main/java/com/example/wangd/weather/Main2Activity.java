@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Transition;
+import android.transition.TransitionValues;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -208,6 +210,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                     ViewGroup.LayoutParams.WRAP_CONTENT);
             popupWindow.setOutsideTouchable(true);
             popupWindow.setFocusable(true);
+            popupWindow.setAnimationStyle(R.style.pop_animation);
 
             int offx = getResources().getDimensionPixelOffset(R.dimen.item_5dp);
             int offy = offx;

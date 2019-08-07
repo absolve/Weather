@@ -14,6 +14,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-
-
+    <!--动画-->
+    <style name="pop_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
+    </style>
 </resources>
