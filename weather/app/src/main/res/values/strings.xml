@@ -26,4 +26,5 @@
 
     <string name="img_description">icon</string>
     <string name="data_info">Data from Openweathermap and HeWeather.</string>
+    <string name="title_activity_chart">ChartActivity</string>
 </resources>
