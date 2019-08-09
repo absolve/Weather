@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -72,6 +73,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     private int cOrk = 0; //0是显示摄氏度 1是显示开氏度 2显示华氏度
     public ImageView iv_more, iv_loc; //更多的按钮 定位
     private PopupWindow popupWindow;  //弹出框
+    private long exitTime=0; //退出时间  2s按下返回键退出
     //定位后的数据
     private LocationEvent tempLocation = null;
 
@@ -542,5 +544,15 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis()-exitTime<=2000){
+            super.onBackPressed();
+        }else{
+            exitTime=System.currentTimeMillis();
+            Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
+        }
     }
 }
