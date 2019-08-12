@@ -62,7 +62,8 @@ public class ChartActivity extends AppCompatActivity {
         rightAxis.setTextSize(12f);
 
         XAxis xAxis1 = chart.getXAxis();
-        xAxis1.setTextSize(12f);
+        xAxis1.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis1.setTextSize(10f);
 
         final String[] quarters = new String[] { "Q1", "Q2", "Q3", "Q4","Q5","Q6","Q7" };
         ValueFormatter formatter = new ValueFormatter() {
@@ -74,6 +75,7 @@ public class ChartActivity extends AppCompatActivity {
         XAxis xAxis = chart.getXAxis();
         xAxis.setGranularity(1f); // minimum axis-step (interval) is 1
         xAxis.setValueFormatter(formatter);
+
         ArrayList<Entry> values = new ArrayList<>();
 
         for (int i = 0; i < 7; i++) {
@@ -81,8 +83,8 @@ public class ChartActivity extends AppCompatActivity {
             values.add(new Entry(i, val));
         }
         LineDataSet set1 = new LineDataSet(values, "气温变化");
-        set1.setLineWidth(1.75f);
-        set1.setCircleRadius(5f);
+        set1.setLineWidth(1.25f);
+        set1.setCircleRadius(3f);
         set1.setCircleHoleRadius(2.5f);
         set1.setColor(Color.BLUE);
         set1.setCircleColor(Color.BLUE);

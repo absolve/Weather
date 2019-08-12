@@ -208,7 +208,7 @@ public class DataUtils {
             case 9:
                 return !zh_cn ? "South-Southwest" : "西南偏南风";
             case 10:
-                return !zh_cn ? "Southwest" : "西南方风";
+                return !zh_cn ? "Southwest" : "西南风";
             case 11:
                 return !zh_cn ? "West-Southwest" : "西南偏西风";
             case 12:

@@ -1,6 +1,7 @@
 package com.example.wangd.weather;
 
 import android.Manifest;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -38,6 +39,14 @@ import com.example.wangd.weather.model.WeatherForecastData;
 import com.example.wangd.weather.utils.DataUtils;
 import com.example.wangd.weather.utils.HttpUtil;
 import com.example.wangd.weather.views.SimpleItemDecoration;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -74,6 +83,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     public ImageView iv_more, iv_loc; //更多的按钮 定位
     private PopupWindow popupWindow;  //弹出框
     private long exitTime=0; //退出时间  2s按下返回键退出
+
     //定位后的数据
     private LocationEvent tempLocation = null;
 
@@ -108,6 +118,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         data = new ArrayList<>();
         adapter = new ItemAdapter(this, data);
         rv_forecast.setAdapter(adapter);
+
+
         //获取权限
         checkPermission();
         //初始化定位
@@ -179,7 +191,6 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onLocationChanged(AMapLocation location) {
             if (null != location) {
-//                StringBuffer sb = new StringBuffer();
                 //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
                 if (location.getErrorCode() == 0) {
                     if (!location.getCountry().contentEquals("中国")) {
@@ -441,7 +452,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 String humidity = String.format(getResources().getString(R.string.text_humidity),
                         weatherData.getHumidity() + "%");
                 tv_humidity.setText(humidity);//湿度
-                String wind_deg = String.format(getResources().getString(R.string.text_wind_direction_zh)
+                String wind_deg = String.format(getResources().getString(R.string.text_wind_direction)
                         , weatherData.getWind_deg());
                 tv_wind_dt.setText(wind_deg);  //风向
                 String sunrise = String.format(getResources().getString(R.string.text_sunrise),
@@ -470,6 +481,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         if (event.flag == 0) {
             Log.d("---", event.data.toString());
             adapter.addData(event.data); //设置数据
+//            addChartData(event.data); //设置图表数据
         } else {
             showToast("获取天气预报失败", 1);
         }

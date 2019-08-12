@@ -137,30 +137,30 @@
             android:id="@+id/tv_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text=""
             android:textColor="@color/white"
-            android:layout_centerInParent="true"
             android:textSize="@dimen/text_size_22" />
+
         <ImageView
             android:id="@+id/iv_loc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_toEndOf="@+id/tv_location"
-            app:srcCompat="@drawable/ic_place_black_24dp"
             android:layout_marginStart="@dimen/item_3dp"
+            android:layout_toEndOf="@+id/tv_location"
             android:contentDescription="@string/img_description"
-            />
+            app:srcCompat="@drawable/ic_place_black_24dp" />
 
         <ImageView
             android:id="@+id/iv_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/item_10dp"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentEnd="true"
-            app:srcCompat="@drawable/ic_more_vert_black_24dp"
-            android:contentDescription="@string/img_description" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="@dimen/item_10dp"
+            android:contentDescription="@string/img_description"
+            app:srcCompat="@drawable/ic_more_vert_black_24dp" />
     </RelativeLayout>
 
 
@@ -177,19 +177,31 @@
             android:id="@+id/ns_scroll"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:orientation="vertical">
 
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_forecast"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="@dimen/item_margin"
-                />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_forecast"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/item_margin" />
 
+                <!--<com.github.mikephil.charting.charts.LineChart-->
+                    <!--android:id="@+id/chart1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="280dp"-->
+                    <!--android:layout_marginStart="@dimen/item_10dp"-->
+                    <!--android:layout_marginTop="@dimen/item_10dp"-->
+                    <!--android:layout_marginEnd="@dimen/item_10dp"-->
+                    <!--android:layout_marginBottom="@dimen/item_10dp"-->
+                    <!--android:elevation="2dp"-->
+                    <!--android:visibility="visible" />-->
+
+            <!--</LinearLayout>-->
         </android.support.v4.widget.NestedScrollView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
