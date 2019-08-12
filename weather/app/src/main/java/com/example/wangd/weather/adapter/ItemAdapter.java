@@ -231,10 +231,11 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             chart.getDescription().setEnabled(false);
             chart.setDrawGridBackground(false);
             chart.setTouchEnabled(true);
-            chart.setBackgroundColor(Color.WHITE);
+//            chart.setBackgroundColor(Color.WHITE);
             chart.setDrawBorders(false);
             chart.setDragEnabled(false);
             chart.setScaleEnabled(true);
+            chart.setBackgroundResource(R.drawable.round_style_white1);
             chart.animateX(1000);
             //设置字体大小
             YAxis leftAxis = chart.getAxisLeft();

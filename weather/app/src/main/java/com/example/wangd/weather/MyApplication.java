@@ -18,7 +18,7 @@ public class MyApplication extends Application {
         super.onCreate();
 
         OkHttpClient client1 = new OkHttpClient.Builder()
-                .connectTimeout(35, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(35, TimeUnit.SECONDS)
                 .readTimeout(35, TimeUnit.SECONDS)
                 .build();
